@@ -1,6 +1,8 @@
+import 'package:checky/services/database/database_connector.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  initialiseDatabase();
   runApp(const MainApp());
 }
 
