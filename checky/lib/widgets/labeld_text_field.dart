@@ -11,6 +11,7 @@ class TitledField extends StatelessWidget {
     this.labelColor = CColors.black,
     this.filled = false,
     this.fillColor = Colors.transparent,
+    required this.controller,
   });
 
   final String label;
@@ -20,6 +21,7 @@ class TitledField extends StatelessWidget {
   final Color? labelColor;
   final bool? filled;
   final Color? fillColor;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class TitledField extends StatelessWidget {
           height: 8,
         ),
         TextField(
+          controller: controller,
           obscureText: obscureText!,
           decoration: InputDecoration(
             filled: filled,
