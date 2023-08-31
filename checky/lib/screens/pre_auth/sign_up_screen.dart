@@ -2,15 +2,31 @@ import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 //TODO filed movement
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController neamController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    neamController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
+    final supabase = Supabase.instance.client;
     return Scaffold(
       resizeToAvoidBottomInset: false, //Need to be checked
       backgroundColor: CColors.lightYellow,
@@ -44,7 +60,8 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     CSpaces.kVspace16,
-                    const TitledField(
+                    TitledField(
+                      controller: neamController,
                       label: "Name",
                       hintText: "Enter your name",
                       icon: Icons.person,
@@ -53,7 +70,8 @@ class SignUpScreen extends StatelessWidget {
                       fillColor: CColors.white,
                     ),
                     CSpaces.kVspace16,
-                    const TitledField(
+                    TitledField(
+                      controller: emailController,
                       label: "Email",
                       hintText: "Enter your email",
                       icon: Icons.alternate_email_rounded,
@@ -62,7 +80,8 @@ class SignUpScreen extends StatelessWidget {
                       fillColor: CColors.white,
                     ),
                     CSpaces.kVspace16,
-                    const TitledField(
+                    TitledField(
+                      controller: passwordController,
                       label: "Password",
                       hintText: "Enter your password",
                       icon: Icons.lock_outline,
@@ -72,7 +91,8 @@ class SignUpScreen extends StatelessWidget {
                       fillColor: CColors.white,
                     ),
                     CSpaces.kVspace16,
-                    const TitledField(
+                    TitledField(
+                      controller: passwordController,
                       label: "Password confirmation",
                       hintText: "Enter your password",
                       icon: Icons.alternate_email_rounded,
@@ -82,7 +102,16 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     CSpaces.kVspace24,
                     InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        if ((emailController.text.isNotEmpty &&
+                                emailController.text.isValidEmail) &&
+                            passwordController.text.isNotEmpty) {
+                          await supabase.auth.signUp(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                        }
+                      },
                       child: Container(
                         width: MediaQuery.of(context).size.width - 40,
                         height: 60,
@@ -130,4 +159,10 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+extension Email on String {
+  bool get isValidEmail => RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(this);
 }
