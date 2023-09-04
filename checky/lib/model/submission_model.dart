@@ -1,7 +1,6 @@
 class Submission {
   int? id;
-  String? createdAt;
-  String? submissionTime;
+  DateTime? submissionTime;
   int? marksAquired;
   int? marksAvailable;
   int? assignmentId;
@@ -9,28 +8,23 @@ class Submission {
 
   Submission(
       {this.id,
-      this.createdAt,
       this.submissionTime,
       this.marksAquired,
       this.marksAvailable,
       this.assignmentId,
       this.userId});
 
-  Submission.fromJson(Map<String, dynamic> json) {
+  Submission.fromJson(Map json) {
     id = json['id'];
-    createdAt = json['created_at'];
-    submissionTime = json['submission_time '];
-    marksAquired = json['marks_aquired '];
+    submissionTime = DateTime.parse(json['submission_time']);
+    marksAquired = json['marks_aquired'];
     marksAvailable = json['marks_available'];
     assignmentId = json['assignment_id'];
     userId = json['user_id'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['created_at'] = this.createdAt;
-    data['submission_time '] = this.submissionTime;
+  Map toJson() {
+    final Map data = new Map();
     data['marks_aquired '] = this.marksAquired;
     data['marks_available'] = this.marksAvailable;
     data['assignment_id'] = this.assignmentId;
