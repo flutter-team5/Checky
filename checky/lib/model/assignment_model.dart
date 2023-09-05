@@ -1,29 +1,24 @@
 class Assignment {
   int? id;
-  String? createdAt;
   String? assignmentTitle;
   String? assignmentDescription;
   int? userId;
 
   Assignment(
       {this.id,
-      this.createdAt,
       this.assignmentTitle,
       this.assignmentDescription,
       this.userId});
 
-  Assignment.fromJson(Map<String, dynamic> json) {
+  Assignment.fromJson(Map json) {
     id = json['id'];
-    createdAt = json['created_at'];
     assignmentTitle = json['assignment_title '];
     assignmentDescription = json['assignment_description '];
     userId = json['user_id'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['created_at'] = this.createdAt;
+  Map toJson() {
+    final Map data = new Map();
     data['assignment_title '] = this.assignmentTitle;
     data['assignment_description '] = this.assignmentDescription;
     data['user_id'] = this.userId;
