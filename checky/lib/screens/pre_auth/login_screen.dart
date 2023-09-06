@@ -1,17 +1,34 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/screens/pre_auth/sign_up_screen.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 //TODO filed movement
 
-class LogInScreen extends StatelessWidget {
+class LogInScreen extends StatefulWidget {
   const LogInScreen({
     super.key,
   });
 
   @override
+  State<LogInScreen> createState() => _LogInScreenState();
+}
+
+class _LogInScreenState extends State<LogInScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
+    final supabase = Supabase.instance.client;
     return Scaffold(
       backgroundColor: CColors.yellow,
       resizeToAvoidBottomInset: false,
@@ -53,12 +70,14 @@ class LogInScreen extends StatelessWidget {
                       ),
                     ),
                     CSpaces.kVspace32,
-                    const TitledField(
+                    TitledField(
+                        controller: emailController,
                         label: "Email",
                         hintText: "Enter your email",
                         icon: Icons.alternate_email_rounded),
                     CSpaces.kVspace24,
-                    const TitledField(
+                    TitledField(
+                      controller: passwordController,
                       label: "Password",
                       hintText: "Enter your password",
                       icon: Icons.lock_outline,
@@ -66,7 +85,16 @@ class LogInScreen extends StatelessWidget {
                     ),
                     CSpaces.kVspace32,
                     InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        if ((emailController.text.isNotEmpty &&
+                                emailController.text.isValidEmail) &&
+                            passwordController.text.isNotEmpty) {
+                          await supabase.auth.signInWithPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                        }
+                      },
                       child: Container(
                         width: MediaQuery.of(context).size.width - 40,
                         height: 60,
