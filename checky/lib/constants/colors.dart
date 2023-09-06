@@ -12,5 +12,6 @@ class CColors {
   static const lightBeige = Color(0xFFF9F5EB);
   static const white = Colors.white;
   static const black = Colors.black;
+  static const darkGrey = Color.fromARGB(255, 63, 63, 63);
   static const grey = Colors.grey;
 }
