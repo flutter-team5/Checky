@@ -45,3 +45,8 @@ Future<List<Submission>?> getSubmissionsForAssignment(int assignmentId) async {
   }
   return submissions;
 }
+
+Future insertSubmission(Map submission) async {
+  final supabase = Supabase.instance.client;
+  await supabase.from('submission').insert(submission);
+}
