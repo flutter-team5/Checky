@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CSpaces {
+  static SizedBox kVspace4 = const SizedBox(
+    height: 4,
+  );
   static SizedBox kVspace8 = const SizedBox(
     height: 8,
   );
@@ -18,6 +21,9 @@ class CSpaces {
   );
   static SizedBox kVspace124 = const SizedBox(
     height: 124,
+  );
+  static SizedBox kHspace4 = const SizedBox(
+    width: 4,
   );
   static SizedBox kHspace8 = const SizedBox(
     width: 8,
