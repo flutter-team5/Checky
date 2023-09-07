@@ -12,8 +12,8 @@ class SearchField extends StatelessWidget {
       decoration: const ShapeDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromARGB(255, 188, 187, 187),
-            Color.fromARGB(255, 243, 243, 243)
+            Color.fromARGB(255, 194, 193, 193),
+            Color.fromARGB(221, 232, 232, 232)
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

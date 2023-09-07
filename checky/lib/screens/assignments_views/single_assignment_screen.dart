@@ -2,6 +2,7 @@ import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/services/api/grading_api.dart';
 import 'package:checky/services/database/services/assignments_services.dart';
+import 'package:checky/widgets/custom_botton.dart';
 import 'package:checky/widgets/single_assignment_widgets/attempt_card.dart';
 import 'package:flutter/material.dart';
 
@@ -164,30 +165,8 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
         onTap: () async {
           uploadFileFromUser(await getAssignmentById(2));
         },
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.only(bottom: 30),
-          width: MediaQuery.of(context).size.width * 0.35,
-          height: 50,
-          decoration: BoxDecoration(
-            color: CColors.darkGrey,
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 4,
-                blurRadius: 9,
-                offset: const Offset(0, 5),
-              ),
-            ],
-          ),
-          child: const Center(
-            child: Text(
-              "+ New submission",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-          ),
+        child: const CustomButton(
+          title: "+ New submission",
         ),
       ),
     );

@@ -17,14 +17,14 @@ class AssignCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.4),
-              spreadRadius: 2,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
+              spreadRadius: 2.5,
+              blurRadius: 8,
+              offset: const Offset(0, 4),
             ),
           ],
         ),
-        width: MediaQuery.of(context).size.width - 20,
-        height: MediaQuery.of(context).size.height * 0.16,
+        width: MediaQuery.of(context).size.width - 35,
+        height: MediaQuery.of(context).size.height * 0.15,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -33,7 +33,7 @@ class AssignCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Assignment title",
+                    "Assignment title", //TODO Add assignment title
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: 'ADLaMDisplay',
@@ -42,6 +42,7 @@ class AssignCard extends StatelessWidget {
                   ),
                   CSpaces.kVspace8,
                   const Text(
+                    // TODO Add Assiignment Description
                     "Assiignment Description Assiignment Description Assiignment Description Assiignment Description",
                     maxLines: 2,
                     style: TextStyle(
@@ -53,7 +54,7 @@ class AssignCard extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 3),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               width: 80,
               height: 28,
               decoration: BoxDecoration(
@@ -61,7 +62,7 @@ class AssignCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Text(
-                "Python",
+                "Java", // TODO Add programming language
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'ADLaMDisplay',
