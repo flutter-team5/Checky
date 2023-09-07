@@ -1,5 +1,7 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/extentions/extention.dart';
+import 'package:checky/screens/assignments_views/single_assignment_screen.dart';
 import 'package:flutter/material.dart';
 
 class AssignCard extends StatelessWidget {
@@ -8,7 +10,9 @@ class AssignCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.push(screen: const SingleAssignmentScreen());
+      },
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(

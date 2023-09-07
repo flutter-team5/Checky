@@ -8,7 +8,10 @@ class CustomButton extends StatelessWidget {
     this.margBottom = 30,
     this.margRight = 0,
     this.vPadding = 9,
-    this.hPadding = 20, this.height = 50,
+    this.hPadding = 20,
+    this.height = 50,
+    this.width = 0.35,
+    this.fontSize = 15,
   });
 
   final String title;
@@ -17,14 +20,15 @@ class CustomButton extends StatelessWidget {
   final double? vPadding;
   final double? hPadding;
   final double? height;
+  final double? width;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: vPadding!, horizontal: hPadding!),
-      margin: EdgeInsets.only(
-          bottom: margBottom!, right: margRight!), 
-      // width: MediaQuery.of(context).size.width * 0.35,
+      margin: EdgeInsets.only(bottom: margBottom!, right: margRight!),
+      width: MediaQuery.of(context).size.width * width!,
       height: height!,
       decoration: BoxDecoration(
         color: CColors.darkGrey,
@@ -41,8 +45,8 @@ class CustomButton extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: const TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+          style:  TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: fontSize!),
         ),
       ),
     );
