@@ -2,6 +2,7 @@ import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 //TODO filed movement
@@ -17,6 +18,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController neamController = TextEditingController();
+  
+  
   @override
   void dispose() {
     emailController.dispose();
@@ -90,6 +93,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       filled: true,
                       fillColor: CColors.white,
                     ),
+                       new SizedBox(
+                    height: 5,
+                  ),
+                  
                     CSpaces.kVspace16,
                     TitledField(
                       controller: passwordController,

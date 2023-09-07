@@ -1,6 +1,7 @@
 import 'package:checky/screens/assignments_views/home_screen.dart';
 import 'package:checky/screens/assignments_views/single_assignment_screen.dart';
 import 'package:checky/services/database/database_connector.dart';
+import 'package:checky/screens/assignments_views/main_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,10 +14,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
-      //SingleAssignmentScreen(),
+      
     );
   }
 }
