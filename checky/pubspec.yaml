@@ -13,6 +13,7 @@ dependencies:
   http: ^1.1.0
   supabase_flutter: ^1.10.14
   path: ^1.8.0
+  flutter_snake_navigationbar: ^0.6.1
 
 dev_dependencies:
   flutter_test:
