@@ -1,5 +1,7 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/services/api/grading_api.dart';
+import 'package:checky/services/database/services/assignments_services.dart';
 import 'package:checky/widgets/single_assignment_widgets/attempt_card.dart';
 import 'package:flutter/material.dart';
 
@@ -159,7 +161,9 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
         ),
       ),
       floatingActionButton: InkWell(
-        onTap: () {},
+        onTap: () async {
+          uploadFileFromUser(await getAssignmentById(2));
+        },
         child: Container(
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.only(bottom: 30),
