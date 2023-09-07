@@ -1,8 +1,8 @@
 // Home screen navgation will be here
-import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/screens/assignments_views/search_filed.dart';
 import 'package:checky/widgets/card_widget_view.dart';
+import 'package:checky/widgets/custom_botton.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,31 +13,22 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: CColors.darkGrey,
-      //   toolbarHeight: 80,
-      //   title: const Text(
-      //     "Checky",
-      //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-      //   ),
-      //   leading: Padding(
-      //     padding: const EdgeInsets.only(left: 10.0),
-      //     child: Image.asset("assets/img/logo.png"),
-      //   ),
-      // ),
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(top: 50),
-            decoration: const BoxDecoration(color: CColors.darkGrey),
-            height: MediaQuery.of(context).size.height * 0.2,
+            padding: const EdgeInsets.only(top: 50),
+            // decoration: const BoxDecoration(color: CColors.darkGrey),
+            height: MediaQuery.of(context).size.height * 0.18,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20.0),
+              padding: const EdgeInsets.only(
+                left: 20.0,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Image.asset(
-                    "assets/img/logo.png",
+                    "assets/img/logo_inside.png",
                     width: 35,
                   ),
                   CSpaces.kHspace16,
@@ -48,31 +39,75 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 10,
+          const Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 10.0, left: 10, bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Assignments",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    CustomButton(
+                      title: "+ Create",
+                      margBottom: 5,
+                      margRight: 10,
+                      hPadding: 15,
+                      height: 40,
+                    ),
+                  ],
                 ),
-                AssignCard(),
-                SizedBox(
-                  height: 10,
+              )
+            ],
+          ),
+          Center(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height - 220,
+              child: const SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    AssignCard(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    AssignCard(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    AssignCard(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    AssignCard(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    AssignCard(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    AssignCard(),
+                    SizedBox(
+                      height: 25,
+                    ),
+                  ],
                 ),
-                AssignCard(),
-                SizedBox(
-                  height: 10,
-                ),
-                AssignCard(),
-                SizedBox(
-                  height: 10,
-                ),
-                AssignCard(),
-              ],
+              ),
             ),
           ),
         ],
       ),
+      // bottomNavigationBar: Bottom_nav(),
     );
   }
 }
