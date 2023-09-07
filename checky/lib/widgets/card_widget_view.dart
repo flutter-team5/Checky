@@ -2,7 +2,6 @@ import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:flutter/material.dart';
 
-
 class AssignCard extends StatelessWidget {
   const AssignCard({super.key});
 
@@ -15,6 +14,14 @@ class AssignCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: CColors.beige,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.4),
+              spreadRadius: 2,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
+            ),
+          ],
         ),
         width: MediaQuery.of(context).size.width - 20,
         height: MediaQuery.of(context).size.height * 0.16,

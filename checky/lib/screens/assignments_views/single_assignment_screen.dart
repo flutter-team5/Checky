@@ -1,10 +1,16 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/widgets/single_assignment_widgets/attempt_card.dart';
 import 'package:flutter/material.dart';
 
-class SingleAssignmentScreen extends StatelessWidget {
+class SingleAssignmentScreen extends StatefulWidget {
   const SingleAssignmentScreen({super.key});
 
+  @override
+  State<SingleAssignmentScreen> createState() => _SingleAssignmentScreenState();
+}
+
+class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +85,71 @@ class SingleAssignmentScreen extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  CSpaces.kVspace32,
+                  const Text(
+                    "Privous Attempts",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  CSpaces.kVspace16,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5, left: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Time",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                        ),
+                        CSpaces.kHspace4,
+                        const Text(
+                          "Mark",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                        ),
+                        const Text(
+                          "Assignment mark",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Column(
+                          children: [
+                            CSpaces.kVspace8,
+                            const Attempt_card(),
+                            CSpaces.kVspace8,
+                            const Attempt_card(),
+                            CSpaces.kVspace8,
+                            const Attempt_card(),
+                            CSpaces.kVspace8,
+                            const Attempt_card(),
+                            CSpaces.kVspace8,
+                            const Attempt_card(),
+                            CSpaces.kVspace8,
+                            const Attempt_card(),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
