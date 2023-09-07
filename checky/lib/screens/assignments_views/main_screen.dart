@@ -3,15 +3,16 @@ import 'package:checky/screens/assignments_views/create_assigment.dart';
 import 'package:checky/screens/assignments_views/home_screen.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _BottomNavState createState() => _BottomNavState();
 }
 
-class _BottomNavState extends State<MainScreen>
-    with TickerProviderStateMixin {
+class _BottomNavState extends State<MainScreen> with TickerProviderStateMixin {
   var _selectedIndex = 0;
 
   void _handleIndexChanged(int i) {
@@ -21,54 +22,46 @@ class _BottomNavState extends State<MainScreen>
   }
 
   List screens = [
-    HomeScreen(),
-    CreateAssigment(),
-    HomeScreen(),
+    const CreateAssigment(),
+    const HomeScreen(),
+    const HomeScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    var anim = AnimationController(
-      vsync: this,
-      value: 1,
-      duration: const Duration(milliseconds: 500),
-    );
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: screens[_selectedIndex],
       extendBody: true,
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 10),
-        child: DotNavigationBar(
-          backgroundColor: CColors.darkGrey,
-          margin: EdgeInsets.only(left: 10, right: 10),
-          currentIndex: _selectedIndex,
-          dotIndicatorColor: Colors.white,
-          unselectedItemColor: Colors.white,
-          splashBorderRadius: 50,
-          // enableFloatingNavBar: false,
-          onTap: _handleIndexChanged,
-          items: [
-            /// Home
-            DotNavigationBarItem(
-              icon: Icon(Icons.chat),
-              selectedColor: CColors.ligthRed,
-            ),
+      bottomNavigationBar: DotNavigationBar(
+        backgroundColor: CColors.darkGrey,
+        margin: const EdgeInsets.only(left: 10, right: 10),
+        paddingR: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        enablePaddingAnimation: false,
+        currentIndex: _selectedIndex,
+        dotIndicatorColor: Colors.white,
+        unselectedItemColor: Colors.white,
+        splashBorderRadius: 50,
+        onTap: _handleIndexChanged,
+        items: [
+          /// Home
+          DotNavigationBarItem(
+            icon: const Icon(Icons.chat),
+            selectedColor: CColors.ligthRed,
+          ),
 
-            /// Profile
-            DotNavigationBarItem(
-              icon: Icon(Icons.home),
-              selectedColor: CColors.ligthRed,
-            ),
-            //CHAT GPT
-            DotNavigationBarItem(
-              icon: Icon(Icons.person),
-              selectedColor: CColors.ligthRed,
-            ),
-          ],
-        ),
+          /// Profile
+          DotNavigationBarItem(
+            icon: const Icon(Icons.home),
+            selectedColor: CColors.ligthRed,
+          ),
+          //CHAT GPT
+          DotNavigationBarItem(
+            icon: const Icon(Icons.person),
+            selectedColor: CColors.ligthRed,
+          ),
+        ],
       ),
     );
   }
 }
-
-enum _SelectedTab { home, favorite, search, person }
