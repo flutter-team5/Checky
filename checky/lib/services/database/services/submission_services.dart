@@ -1,4 +1,6 @@
 import 'package:checky/model/submission_model.dart';
+import 'package:checky/model/user_profile_model.dart';
+import 'package:checky/services/database/services/profile_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<List<Submission>?> getSubmissions() async {
@@ -44,6 +46,32 @@ Future<List<Submission>?> getSubmissionsForAssignment(int assignmentId) async {
     submissions.add(Submission.fromJson(submissionJson));
   }
   return submissions;
+}
+
+Future<Submission> getUserHighestLastAttempt(
+    int assignmentId, int userId) async {
+  List<Submission>? submissions =
+      await getUserSubmissionsOnAssignment(assignmentId, userId);
+  submissions = submissions?.reversed.toList();
+  Submission highestLastAttempt = submissions![0];
+
+  for (var submission in submissions) {
+    if (submission.marksAquired! > highestLastAttempt.marksAquired!) {
+      highestLastAttempt = submission;
+    }
+  }
+
+  return highestLastAttempt;
+}
+
+Future<List<Submission>?> getUsersFinalAttempt(int assignmentId) async {
+  List<UserProfile>? users = await getUserSubmittedToAssignment(assignmentId);
+  List<Submission> finalAttempts = [];
+
+  for (var user in users!) {
+    finalAttempts.add(await getUserHighestLastAttempt(assignmentId, user.id!));
+  }
+  return finalAttempts;
 }
 
 Future insertSubmission(Map submission) async {

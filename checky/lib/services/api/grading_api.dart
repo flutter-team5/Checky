@@ -27,7 +27,6 @@ gradeSubmission(Assignment assignment, String fileLocation) async {
   submission["marks_aquired"] = marksAquired;
   submission["marks_available"] = marksAvailable;
   submission["assignment_id"] = assignment.id;
-  //TODO: check it works
   submission["user_id"] =
       getUserProfileByUserId(Supabase.instance.client.auth.currentUser!.id);
 

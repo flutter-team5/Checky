@@ -1,6 +1,6 @@
 class UserProfile {
   int? id;
-  int? userId;
+  String? userId;
   String? userName;
   String? avatar;
 
