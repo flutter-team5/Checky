@@ -9,9 +9,11 @@ class TitledField extends StatelessWidget {
     required this.icon,
     this.obscureText = false,
     this.labelColor = CColors.black,
-    this.filled = false,
-    this.fillColor = Colors.transparent,
     required this.controller,
+    this.fieldColor = const [
+      Color.fromARGB(255, 209, 209, 209),
+      Color.fromARGB(221, 232, 232, 232)
+    ],
   });
 
   final String label;
@@ -19,9 +21,8 @@ class TitledField extends StatelessWidget {
   final IconData icon;
   final bool? obscureText;
   final Color? labelColor;
-  final bool? filled;
-  final Color? fillColor;
   final TextEditingController controller;
+  final List<Color>? fieldColor;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,8 @@ class TitledField extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w300,
+            fontSize: 17,
+            fontWeight: FontWeight.w500,
             color: labelColor,
             fontFamily: 'ADLaMDisplay',
           ),
@@ -40,22 +41,47 @@ class TitledField extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        TextField(
-          controller: controller,
-          obscureText: obscureText!,
-          decoration: InputDecoration(
-            filled: filled,
-            fillColor: fillColor,
-            prefixIcon: Icon(icon),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
-              borderSide: const BorderSide(
-                width: 1,
+        Container(
+          decoration: ShapeDecoration(
+            gradient: LinearGradient(
+              colors: fieldColor!,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: const [0.0, 0.45],
+              tileMode: TileMode.clamp,
+            ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(25.0)),
+            ),
+          ),
+          child: TextField(
+            controller: controller,
+            obscureText: obscureText!,
+            expands: false,
+            style: const TextStyle(fontSize: 20.0, color: Colors.black54),
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(12.0),
+              prefixIcon: Icon(
+                icon,
+                color: Colors.black54,
+              ),
+              hintText: hintText,
+              hintStyle: const TextStyle(
                 color: Colors.grey,
-                //CColors.ligthRed,
+                fontFamily: 'Rubik-VariableFont_wght',
+                fontWeight: FontWeight.w600,
+                fontSize: 17,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(32.0),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(32.0),
               ),
             ),
-            hintText: hintText,
+            onSubmitted: (value) {},
           ),
         ),
       ],
