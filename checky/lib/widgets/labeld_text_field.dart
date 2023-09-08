@@ -6,24 +6,29 @@ class TitledField extends StatelessWidget {
     super.key,
     required this.label,
     required this.hintText,
-    required this.icon,
+    this.icon,
     this.obscureText = false,
     this.labelColor = CColors.black,
-    required this.controller,
+    this.controller,
     this.fieldColor = const [
       Color.fromARGB(255, 209, 209, 209),
       Color.fromARGB(221, 232, 232, 232)
     ],
+    this.fieldMaxLines = 1,
+    this.fontSize = 17,
+    this.labelWeight = FontWeight.w500,
   });
 
   final String label;
   final String hintText;
-  final IconData icon;
+  final IconData? icon;
   final bool? obscureText;
   final Color? labelColor;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final List<Color>? fieldColor;
-
+  final int? fieldMaxLines;
+  final double? fontSize;
+  final FontWeight? labelWeight;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,8 +37,8 @@ class TitledField extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w500,
+            fontSize: fontSize!,
+            fontWeight: labelWeight,
             color: labelColor,
             fontFamily: 'ADLaMDisplay',
           ),
@@ -57,6 +62,7 @@ class TitledField extends StatelessWidget {
           child: TextField(
             controller: controller,
             obscureText: obscureText!,
+            maxLines: fieldMaxLines,
             expands: false,
             style: const TextStyle(fontSize: 20.0, color: Colors.black54),
             decoration: InputDecoration(
