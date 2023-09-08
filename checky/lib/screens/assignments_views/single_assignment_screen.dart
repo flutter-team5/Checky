@@ -27,7 +27,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
           children: [
             Container(
               margin: const EdgeInsets.only(
-                  top: 10, left: 25, right: 25, bottom: 20),
+                  top: 10, left: 25, right: 25),
               child: Column(
                 //Start of the main column
                 crossAxisAlignment: CrossAxisAlignment.start,
