@@ -29,6 +29,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
               margin: const EdgeInsets.only(
                   top: 10, left: 25, right: 25, bottom: 20),
               child: Column(
+                //Start of the main column
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
@@ -41,6 +42,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                   CSpaces.kVspace32,
+                  //Assignment Detailes Container
                   ShaderMask(
                     shaderCallback: (Rect rect) {
                       return const LinearGradient(
@@ -54,7 +56,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                         ],
                         stops: [
                           0.0,
-                          0.1,
+                          0.03, //Top shadow < less shadow
                           0.9,
                           1.0
                         ], // 10% purple, 80% transparent, 10% purple
@@ -62,13 +64,16 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                     },
                     blendMode: BlendMode.dstOut,
                     child: Container(
-                      padding: EdgeInsets.only(bottom: 20),
+                      padding: const EdgeInsets.only(bottom: 20),
                       height: MediaQuery.of(context).size.height * 0.72,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Column(
+                          //Start of scrolling Column
                           children: [
                             Container(
+                              //Start of Description container
+                              margin: const EdgeInsets.only(top: 10),
                               padding: const EdgeInsets.all(15),
                               decoration: BoxDecoration(
                                   color: CColors.beige,
@@ -125,9 +130,9 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                   ),
                                 ],
                               ),
-                            ),
+                            ), // End of Description Container
                             CSpaces.kVspace16,
-                            Container(
+                            Container( //Start of Previous Attempts Container
                               padding: const EdgeInsets.only(
                                   top: 15, bottom: 5, left: 15, right: 15),
                               decoration: BoxDecoration(
@@ -179,7 +184,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                     ),
                                   ),
                                   CSpaces.kVspace8,
-                                  Container(
+                                  Container(//Start of scrolling attempts container
                                     decoration: BoxDecoration(
                                       // border: Border(
                                       //   top: BorderSide(
@@ -237,7 +242,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ), //End of scrolling attempts container
                                   const Center(
                                     child: Icon(
                                       Icons.keyboard_double_arrow_down_rounded,
@@ -246,20 +251,21 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                   ),
                                 ],
                               ),
-                            ),
+                            ),//End of Previous Attempts Container
                           ],
-                        ),
+                        ), //End of scrolling Column
                       ),
                     ),
                   ),
 
                   // CSpaces.kVspace8,
                 ],
-              ),
+              ), //End of the Main coulmn
             ),
           ],
         ),
       ),
+      //Upload file button 
       floatingActionButton: InkWell(
         onTap: () async {
           uploadFileFromUser(await getAssignmentById(2));
