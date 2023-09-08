@@ -2,7 +2,7 @@
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/assignments_views/create_assigment.dart';
-import 'package:checky/screens/assignments_views/search_filed.dart';
+import 'package:checky/widgets/home_widgets/search_filed.dart';
 import 'package:checky/widgets/card_widget_view.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:flutter/material.dart';
