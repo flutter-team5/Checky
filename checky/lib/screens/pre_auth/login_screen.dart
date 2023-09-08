@@ -1,5 +1,6 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/pre_auth/sign_up_screen.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +28,11 @@ class _LogInScreenState extends State<LogInScreen> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     final supabase = Supabase.instance.client;
     return Scaffold(
-      backgroundColor: CColors.yellow,
+      backgroundColor: CColors.darkGrey,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -40,18 +42,17 @@ class _LogInScreenState extends State<LogInScreen> {
             right: 0,
             child: Container(
               padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 8,
-                    blurRadius: 7,
-                    offset: const Offset(4, 3), // changes position of shadow
+                    color: Color.fromARGB(80, 0, 0, 0),
+                    spreadRadius: 15,
+                    blurRadius: 10,
+                    offset: Offset(4, 3), // changes position of shadow
                   ),
                 ],
                 color: CColors.white,
-                //Color.fromARGB(177, 6, 0, 71),
-                borderRadius: const BorderRadius.only(
+                borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(80),
                 ),
               ),
@@ -107,6 +108,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             "Log in",
                             style: TextStyle(
                                 color: CColors.white,
+                                fontWeight: FontWeight.bold,
                                 fontSize: 20,
                                 fontFamily: 'ADLaMDisplay'),
                           ),
@@ -126,7 +128,9 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            context.push(screen: const SignUpScreen());
+                          },
                           child: const Text(
                             "Sign Up",
                             style: TextStyle(
@@ -143,17 +147,6 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
             ),
           ),
-          // Positioned(
-          //   top: 120,
-          //   left: MediaQuery.of(context).size.width * 0.3,
-          //   child: const Text(
-          //     "Log in",
-          //     style: TextStyle(
-          //       fontFamily: 'ADLaMDisplay',
-          //       fontSize: 55,
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );
