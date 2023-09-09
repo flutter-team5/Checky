@@ -1,14 +1,19 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/model/assignment_model.dart';
 import 'package:checky/model/controllers_model.dart';
+import 'package:checky/model/user_profile_model.dart';
+import 'package:checky/services/database/services/assignments_services.dart';
+import 'package:checky/services/database/services/profile_service.dart';
+import 'package:checky/services/database/services/test_cases_services.dart';
 import 'package:checky/widgets/create_assg_widgets/cancel_dialog.dart';
 import 'package:checky/widgets/create_assg_widgets/test_cases_fileds.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-List<TestCaseFields> casesFieldList = [const TestCaseFields()];
-List<Controller> casesControllerList = [];
+List<Controllers> testCasesControllers = [];
 
 //TODO Scrolling issues
 
@@ -74,7 +79,7 @@ class CreateAssigmentState extends State<CreateAssigment> {
                   ),
                   CSpaces.kVspace24,
                   TitledField(
-                    controller: titleController,
+                    controller: descriptionController,
                     label: "Description",
                     hintText: "Enter assignment description",
                     fieldMaxLines: 10,
@@ -93,9 +98,11 @@ class CreateAssigmentState extends State<CreateAssigment> {
                       primary: false,
                       physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.only(top: 2),
-                      itemCount: casesFieldList.length,
+                      itemCount: testCasesControllers.length,
                       itemBuilder: (context, index) {
-                        return const TestCaseFields();
+                        return TestCaseFields(
+                          controllers: testCasesControllers[index],
+                        );
                       },
                     ),
                   ),
@@ -103,7 +110,30 @@ class CreateAssigmentState extends State<CreateAssigment> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          Map assignmentMap = new Map();
+                          assignmentMap["assignment_title"] =
+                              titleController.text;
+                          assignmentMap["assignment_description"] =
+                              descriptionController.text;
+                          UserProfile userProfile =
+                              await getUserProfileByUserId(Supabase
+                                  .instance.client.auth.currentUser!.id);
+                          assignmentMap["user_id"] = userProfile.id;
+                          Assignment assignment =
+                              await insertAssignment(assignmentMap);
+                          for (Controllers testCasesController
+                              in testCasesControllers) {
+                            Map testCase = new Map();
+                            testCase["input"] = testCasesController.input.text;
+                            testCase["expected_output"] =
+                                testCasesController.output.text;
+                            testCase["mark_assigned"] =
+                                int.parse(testCasesController.mark.text);
+                            testCase["assignment_id"] = assignment.id;
+                            insertTestCase(testCase);
+                          }
+                        },
                         child: const CustomButton(
                           title: "Create",
                           fontSize: 16,
@@ -140,8 +170,8 @@ class CreateAssigmentState extends State<CreateAssigment> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: CColors.ligthRed,
         onPressed: () {
-          if (casesFieldList.length < 3) {
-            casesFieldList.add(const TestCaseFields());
+          if (testCasesControllers.length < 3) {
+            testCasesControllers.add(Controllers());
           } else {
             const caseLimitSnackBar = SnackBar(
               content: Text('You reached the limit number of cases'),

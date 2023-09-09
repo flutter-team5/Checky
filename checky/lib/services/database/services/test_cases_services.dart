@@ -20,10 +20,20 @@ Future<TestCase> getTestCaseById(int id) async {
 
 Future<List<TestCase>?> getAssignmentTestCases(int assignmentId) async {
   final supabase = Supabase.instance.client;
-  final List testCasesJson = await supabase.from('test_case').select().eq("assignment_id", assignmentId);
+  final List testCasesJson = await supabase
+      .from('test_case')
+      .select()
+      .eq("assignment_id", assignmentId);
   final List<TestCase> testCases = [];
   for (final testCaseJson in testCasesJson) {
     testCases.add(TestCase.fromJson(testCaseJson));
   }
   return testCases;
+}
+
+Future<TestCase> insertTestCase(Map testCase) async {
+  final supabase = Supabase.instance.client;
+  final Map testCaseJson =
+      await supabase.from('test_case').insert(testCase).select().single();
+  return TestCase.fromJson(testCaseJson);
 }

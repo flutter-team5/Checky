@@ -17,3 +17,10 @@ Future<Assignment> getAssignmentById(int id) async {
       await supabase.from('assignment').select().eq("id", id).single();
   return Assignment.fromJson(assignmentJson);
 }
+
+Future<Assignment> insertAssignment(Map assigment) async {
+  final supabase = Supabase.instance.client;
+  final Map assignmentJson = await supabase.from('assignment').insert(assigment).select().single();
+
+  return Assignment.fromJson(assignmentJson);
+}
