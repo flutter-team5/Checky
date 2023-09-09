@@ -5,15 +5,12 @@ class Assignment {
   int? userId;
 
   Assignment(
-      {this.id,
-      this.assignmentTitle,
-      this.assignmentDescription,
-      this.userId});
+      {this.id, this.assignmentTitle, this.assignmentDescription, this.userId});
 
   Assignment.fromJson(Map json) {
     id = json['id'];
-    assignmentTitle = json['assignment_title '];
-    assignmentDescription = json['assignment_description '];
+    assignmentTitle = json['assignment_title'];
+    assignmentDescription = json['assignment_description'];
     userId = json['user_id'];
   }
 
