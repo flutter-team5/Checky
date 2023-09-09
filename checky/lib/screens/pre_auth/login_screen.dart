@@ -1,6 +1,7 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
+import 'package:checky/screens/pre_auth/app.dart';
 import 'package:checky/screens/pre_auth/sign_up_screen.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +95,15 @@ class _LogInScreenState extends State<LogInScreen> {
                             email: emailController.text,
                             password: passwordController.text,
                           );
+                          if (context.mounted) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const App()),
+                                (route) {
+                              return false;
+                            });
+                          }
                         }
                       },
                       child: Container(

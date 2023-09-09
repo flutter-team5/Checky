@@ -1,11 +1,14 @@
 import 'package:checky/constants/colors.dart';
+import 'package:checky/screens/pre_auth/app.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final supabase = Supabase.instance.client;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -21,7 +24,16 @@ class Profile extends StatelessWidget {
                 Icons.logout_outlined,
                 color: CColors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                final respone = supabase.auth.signOut();
+                if (respone == supabase.auth.signOut()) {
+                  Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (context) => const App()),
+                      (route) {
+                    return false;
+                  });
+                }
+              },
             )
           ],
         ),

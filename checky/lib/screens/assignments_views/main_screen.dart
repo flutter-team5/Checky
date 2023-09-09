@@ -1,6 +1,7 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/screens/assignments_views/create_assigment.dart';
 import 'package:checky/screens/assignments_views/home_screen.dart';
+import 'package:checky/screens/assignments_views/profile.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class _BottomNavState extends State<MainScreen> with TickerProviderStateMixin {
   List screens = [
     const CreateAssigment(),
     const HomeScreen(),
-    const HomeScreen(),
+    const Profile(),
   ];
 
   @override
