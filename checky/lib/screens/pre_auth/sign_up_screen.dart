@@ -2,6 +2,7 @@ import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/pre_auth/app.dart';
+import 'package:checky/services/database/services/profile_service.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -132,7 +133,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           email: emailController.text,
                           password: passwordController.text,
                         );
-                        // ignore: use_build_context_synchronously
+                        Map userProfile = new Map();
+                        userProfile["user_id"] =
+                            Supabase.instance.client.auth.currentUser!.id;
+                        userProfile["user_name"] = nameController.text;
+                        insertProfile(userProfile);
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

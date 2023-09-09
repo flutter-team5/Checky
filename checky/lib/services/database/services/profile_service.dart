@@ -31,3 +31,9 @@ Future<List<UserProfile>?> getUserSubmittedToAssignment(int assignmentId) async 
   }
   return users;
 }
+
+Future insertProfile(Map profile) async {
+  final supabase = Supabase.instance.client;
+  await supabase.from('user_profile').insert(profile);
+
+}
