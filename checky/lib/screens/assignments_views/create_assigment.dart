@@ -33,109 +33,120 @@ class CreateAssigmentState extends State<CreateAssigment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.only(
-          left: 25,
-          right: 25,
-          bottom: 5,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(
-                top: 80,
-              ),
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/img/logo_inside.png",
-                    width: 35,
-                  ),
-                  CSpaces.kHspace8,
-                  const Text(
-                    "Create new assigment",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+      body: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(
+              top: 80,
+              left: 25,
+              right: 25,
+              bottom: 5,
             ),
-            CSpaces.kVspace32,
-            Expanded(
+            child: Row(
+              children: [
+                Image.asset(
+                  "assets/img/logo_inside.png",
+                  width: 35,
+                ),
+                CSpaces.kHspace8,
+                const Text(
+                  "Create new assigment",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              // color: Colors.amber,
+              margin: const EdgeInsets.only(
+                left: 25,
+                right: 25,
+                bottom: 5,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TitledField(
-                    controller: titleController,
-                    label: "Title",
-                    hintText: "Enter assignment title",
-                    fontSize: 18,
-                    labelWeight: FontWeight.bold,
-                  ),
-                  CSpaces.kVspace24,
-                  TitledField(
-                    controller: titleController,
-                    label: "Description",
-                    hintText: "Enter assignment description",
-                    fieldMaxLines: 10,
-                    fontSize: 18,
-                    labelWeight: FontWeight.bold,
-                  ),
-                  CSpaces.kVspace24,
-                  const Text(
-                    "Test Cases",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  CSpaces.kVspace16,
+                  CSpaces.kVspace32,
                   Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      primary: false,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.only(top: 2),
-                      itemCount: casesFieldList.length,
-                      itemBuilder: (context, index) {
-                        return const TestCaseFields();
-                      },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitledField(
+                          controller: titleController,
+                          label: "Title",
+                          hintText: "Enter assignment title",
+                          fontSize: 18,
+                          labelWeight: FontWeight.bold,
+                        ),
+                        CSpaces.kVspace24,
+                        TitledField(
+                          controller: titleController,
+                          label: "Description",
+                          hintText: "Enter assignment description",
+                          fieldMaxLines: 10,
+                          fontSize: 18,
+                          labelWeight: FontWeight.bold,
+                        ),
+                        CSpaces.kVspace24,
+                        const Text(
+                          "Test Cases",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        CSpaces.kVspace16,
+                        Expanded(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            primary: false,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.only(top: 2),
+                            itemCount: casesFieldList.length,
+                            itemBuilder: (context, index) {
+                              return const TestCaseFields();
+                            },
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {},
+                              child: const CustomButton(
+                                title: "Create",
+                                fontSize: 16,
+                                margBottom: 0,
+                                margRight: 10,
+                                hPadding: 5,
+                                width: 0.29,
+                                height: 37,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                cancelDialog(context);
+                              },
+                              child: const CustomButton(
+                                title: "Cancel",
+                                fontSize: 16,
+                                margBottom: 0,
+                                margRight: 10,
+                                hPadding: 5,
+                                width: 0.29,
+                                height: 37,
+                                buttonColor: CColors.ligthRed,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: const CustomButton(
-                          title: "Create",
-                          fontSize: 16,
-                          margBottom: 0,
-                          margRight: 10,
-                          hPadding: 5,
-                          width: 0.29,
-                          height: 37,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          cancelDialog(context);
-                        },
-                        child: const CustomButton(
-                          title: "Cancel",
-                          fontSize: 16,
-                          margBottom: 0,
-                          margRight: 10,
-                          hPadding: 5,
-                          width: 0.29,
-                          height: 37,
-                          buttonColor: CColors.ligthRed,
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: CColors.ligthRed,
