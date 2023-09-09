@@ -40,8 +40,8 @@ class Profile extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              SizedBox(height: 30),
-              CircleAvatar(
+              const SizedBox(height: 30),
+              const CircleAvatar(
                 backgroundColor: Colors.black,
                 radius: 95,
                 child: CircleAvatar(
@@ -49,18 +49,18 @@ class Profile extends StatelessWidget {
                   backgroundColor: CColors.ligthRed,
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  padding: EdgeInsets.all(10),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.all(10),
                   height: 70,
                   decoration: BoxDecoration(
                     color: CColors.beige,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -76,18 +76,18 @@ class Profile extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  padding: EdgeInsets.all(10),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.all(10),
                   height: 70,
                   decoration: BoxDecoration(
                     color: CColors.beige,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(

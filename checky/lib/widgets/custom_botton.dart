@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
     this.height = 50,
     this.width = 0.35,
     this.fontSize = 15,
+    this.buttonColor = CColors.darkGrey,
   });
 
   final String title;
@@ -22,6 +23,7 @@ class CustomButton extends StatelessWidget {
   final double? height;
   final double? width;
   final double? fontSize;
+  final Color? buttonColor;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class CustomButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width * width!,
       height: height!,
       decoration: BoxDecoration(
-        color: CColors.darkGrey,
+        color: buttonColor,
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
@@ -45,8 +47,10 @@ class CustomButton extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style:  TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: fontSize!),
+          style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize!),
         ),
       ),
     );

@@ -1,9 +1,6 @@
 import 'dart:async';
-
-import 'package:checky/screens/assignments_views/home_screen.dart';
 import 'package:checky/screens/assignments_views/main_screen.dart';
 import 'package:checky/screens/pre_auth/login_screen.dart';
-import 'package:checky/screens/pre_auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

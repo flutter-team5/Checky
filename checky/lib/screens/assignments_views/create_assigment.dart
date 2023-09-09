@@ -1,21 +1,25 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/model/controllers_model.dart';
+import 'package:checky/widgets/create_assg_widgets/cancel_dialog.dart';
 import 'package:checky/widgets/create_assg_widgets/test_cases_fileds.dart';
+import 'package:checky/widgets/custom_botton.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
 
 List<TestCaseFields> casesFieldList = [const TestCaseFields()];
 List<Controller> casesControllerList = [];
 
+//TODO Scrolling issues
+
 class CreateAssigment extends StatefulWidget {
   const CreateAssigment({super.key});
 
   @override
-  State<CreateAssigment> createState() => _CreateAssigmentState();
+  State<CreateAssigment> createState() => CreateAssigmentState();
 }
 
-class _CreateAssigmentState extends State<CreateAssigment> {
+class CreateAssigmentState extends State<CreateAssigment> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
@@ -33,13 +37,12 @@ class _CreateAssigmentState extends State<CreateAssigment> {
         margin: const EdgeInsets.only(
           left: 25,
           right: 25,
-          bottom: 50,
+          bottom: 5,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              // padding: const EdgeInsets.only(top: 60),
               margin: const EdgeInsets.only(
                 top: 80,
               ),
@@ -86,12 +89,47 @@ class _CreateAssigmentState extends State<CreateAssigment> {
                   CSpaces.kVspace16,
                   Expanded(
                     child: ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.only(top: 2),
                       itemCount: casesFieldList.length,
                       itemBuilder: (context, index) {
                         return const TestCaseFields();
                       },
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: const CustomButton(
+                          title: "Create",
+                          fontSize: 16,
+                          margBottom: 0,
+                          margRight: 10,
+                          hPadding: 5,
+                          width: 0.29,
+                          height: 37,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          cancelDialog(context);
+                        },
+                        child: const CustomButton(
+                          title: "Cancel",
+                          fontSize: 16,
+                          margBottom: 0,
+                          margRight: 10,
+                          hPadding: 5,
+                          width: 0.29,
+                          height: 37,
+                          buttonColor: CColors.ligthRed,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -105,12 +143,11 @@ class _CreateAssigmentState extends State<CreateAssigment> {
           if (casesFieldList.length < 3) {
             casesFieldList.add(const TestCaseFields());
           } else {
-            const snackBar = SnackBar(
+            const caseLimitSnackBar = SnackBar(
               content: Text('You reached the limit number of cases'),
               duration: Duration(milliseconds: 1900),
             );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            ;
+            ScaffoldMessenger.of(context).showSnackBar(caseLimitSnackBar);
           }
           setState(() {});
         },

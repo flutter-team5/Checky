@@ -1,13 +1,10 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
-import 'package:checky/screens/assignments_views/main_screen.dart';
 import 'package:checky/screens/pre_auth/app.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-//TODO field movement
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -31,6 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     final supabase = Supabase.instance.client;
     return Scaffold(
@@ -38,6 +36,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
       backgroundColor: CColors.darkGrey,
       body: Stack(
         children: [
+          Positioned(
+            top: 70,
+            left: MediaQuery.of(context).size.width * 0.28,
+            child: const Text(
+              "Sign Up",
+              style: TextStyle(
+                fontFamily: 'ADLaMDisplay',
+                fontSize: 50,
+                color: CColors.white,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 50,
+            left: MediaQuery.of(context).size.width * 0.05,
+            child: InkWell(
+              onTap: () {
+                context.pop();
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                color: CColors.white,
+              ),
+            ),
+          ),
           Positioned(
             bottom: 0,
             left: 0,
@@ -109,6 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           email: emailController.text,
                           password: passwordController.text,
                         );
+                        // ignore: use_build_context_synchronously
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -138,28 +162,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ],
               ),
-            ),
-          ),
-          Positioned(
-            top: 70,
-            left: MediaQuery.of(context).size.width * 0.28,
-            child: const Text(
-              "Sign Up",
-              style: TextStyle(
-                fontFamily: 'ADLaMDisplay',
-                fontSize: 50,
-                color: CColors.white,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 50,
-            left: MediaQuery.of(context).size.width * 0.05,
-            child: InkWell(
-              onTap: () {
-                context.pop();
-              },
-              child: const Icon(Icons.arrow_back),
             ),
           ),
         ],
