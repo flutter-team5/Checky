@@ -5,10 +5,12 @@ class UnlabaledField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.keyboardType = TextInputType.text,
+    required this.controller,
   });
 
   final String hintText;
   final TextInputType? keyboardType;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,6 +30,7 @@ class UnlabaledField extends StatelessWidget {
         ),
       ),
       child: TextField(
+        controller: controller,
         keyboardType: keyboardType,
         textAlign: TextAlign.center,
         expands: false,

@@ -1,13 +1,14 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/model/controllers_model.dart';
 import 'package:checky/screens/assignments_views/create_assigment.dart';
 import 'package:checky/widgets/unlabeled_text_field.dart';
 import 'package:flutter/material.dart';
 
 class TestCaseFields extends StatefulWidget {
-  const TestCaseFields({
-    super.key,
-  });
+  const TestCaseFields({super.key, required this.controllers});
+
+  final Controllers controllers;
 
   @override
   State<TestCaseFields> createState() => _TestCaseFieldsState();
@@ -21,10 +22,10 @@ class _TestCaseFieldsState extends State<TestCaseFields> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          casesFieldList.length > 1
+          testCasesControllers.length > 1
               ? InkWell(
                   onTap: () {
-                    casesFieldList.removeLast();
+                    testCasesControllers.removeLast();
                     setState(() {});
                     context
                         .findAncestorStateOfType<CreateAssigmentState>()
@@ -38,21 +39,24 @@ class _TestCaseFieldsState extends State<TestCaseFields> {
               : const SizedBox(
                   width: 25,
                 ),
-          const Expanded(
+          Expanded(
             child: UnlabaledField(
               hintText: "Input",
+              controller: widget.controllers.input,
             ),
           ),
           CSpaces.kHspace8,
-          const Expanded(
+          Expanded(
             child: UnlabaledField(
               hintText: "Output",
+              controller: widget.controllers.output,
             ),
           ),
           CSpaces.kHspace8,
-          const Expanded(
+          Expanded(
             child: UnlabaledField(
               hintText: "Mark",
+              controller: widget.controllers.mark,
             ),
           ),
         ],
