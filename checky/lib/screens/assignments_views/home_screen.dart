@@ -1,4 +1,5 @@
 // Home screen navgation will be here
+import 'package:checky/bloc/bloc/assignments_bloc.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/assignments_views/create_assigment.dart';
@@ -6,6 +7,7 @@ import 'package:checky/widgets/home_widgets/search_filed.dart';
 import 'package:checky/widgets/home_widgets/card_widget_view.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -14,6 +16,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AssignmentsBloc>().add(GetAssignmentsEvent());
     return Column(
       children: [
         Container(
@@ -98,35 +101,29 @@ class HomeScreen extends StatelessWidget {
               blendMode: BlendMode.dstOut,
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CSpaces.kVspace32,
-                    const AssignCard(),
-                    const SizedBox(
-                      height: 19,
-                    ),
-                    const AssignCard(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const AssignCard(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const AssignCard(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const AssignCard(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const AssignCard(),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                  ],
+                child: BlocBuilder<AssignmentsBloc, AssignmentsState>(
+                  builder: (context, state) {
+                    if (state is AssignmentsLoadingState) {
+                      return const CircularProgressIndicator();
+                    } else if (state is NoAssignmentsFoundState) {
+                      return const Text("No assignments found");
+                    } else if (state is GetAssignmentsSuccessfulState) {
+                      return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CSpaces.kVspace32,
+                            for (var assignment in state.assignments!)
+                              AssignCard(
+                                assignment: assignment,
+                              ),
+                            CSpaces.kVspace32,
+                          ]);
+                    } else if (state is AssignmentsErrorState) {
+                      return Text("Something went wrong");
+                    }
+
+                    return const SizedBox();
+                  },
                 ),
               ),
             ),
