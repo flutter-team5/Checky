@@ -1,5 +1,6 @@
 import 'package:checky/model/assignment_model.dart';
 import 'package:checky/model/test_case_model.dart';
+import 'package:checky/model/user_profile_model.dart';
 import 'package:checky/services/database/services/profile_service.dart';
 import 'package:checky/services/database/services/submission_services.dart';
 import 'package:checky/services/database/services/test_cases_services.dart';
@@ -27,8 +28,9 @@ gradeSubmission(Assignment assignment, String fileLocation) async {
   submission["marks_aquired"] = marksAquired;
   submission["marks_available"] = marksAvailable;
   submission["assignment_id"] = assignment.id;
-  submission["user_id"] =
-      getUserProfileByUserId(Supabase.instance.client.auth.currentUser!.id);
+  UserProfile userProfile = await getUserProfileByUserId(
+      Supabase.instance.client.auth.currentUser!.id);
+  submission["user_id"] = userProfile.id;
 
   insertSubmission(submission);
 }
