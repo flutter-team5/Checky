@@ -22,7 +22,8 @@ class _TestCaseFieldsState extends State<TestCaseFields> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          testCasesControllers.length > 1
+          testCasesControllers.length >
+                  1 //TODO Check if not the first element on the list
               ? InkWell(
                   onTap: () {
                     testCasesControllers.removeLast();
