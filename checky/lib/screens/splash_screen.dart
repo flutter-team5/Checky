@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
             },
             onEnd: () async {
               debugPrint("onEnd 1");
-              await Future.delayed(const Duration(milliseconds: 3000));
+              await Future.delayed(const Duration(milliseconds: 3100));
               debugPrint("onEnd 2");
             }));
   }

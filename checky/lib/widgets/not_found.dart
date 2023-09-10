@@ -24,7 +24,7 @@ class NotFound extends StatelessWidget {
             child: Image.asset('assets/eyes.gif', width: 300, height: 200),
           ),
           Text(
-            "ASSIGNMENT NOT FOUND !",
+            "ASSIGNMENT NOT FOUND!",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ],
