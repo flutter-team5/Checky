@@ -14,7 +14,7 @@ class TestCase {
 
   TestCase.fromJson(Map json) {
     id = json['id'];
-    input = json['input '];
+    input = json['input'];
     expectedOutput = json['expected_output'];
     markAssigned = json['mark_assigned'];
     assignmentId = json['assignment_id'];
