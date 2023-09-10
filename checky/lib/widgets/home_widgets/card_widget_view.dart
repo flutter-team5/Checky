@@ -14,7 +14,7 @@ class AssignCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push(screen: const SingleAssignmentScreen());
+        context.push(screen: SingleAssignmentScreen(assignment: assignment,));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 8),
