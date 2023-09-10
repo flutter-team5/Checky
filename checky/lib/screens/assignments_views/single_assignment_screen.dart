@@ -1,21 +1,21 @@
+import 'package:checky/bloc/submissions_bloc/submissions_bloc.dart';
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/model/assignment_model.dart';
 import 'package:checky/services/api/grading_api.dart';
 import 'package:checky/services/database/services/assignments_services.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:checky/widgets/single_assignment_widgets/attempt_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SingleAssignmentScreen extends StatefulWidget {
-  const SingleAssignmentScreen({super.key});
+class SingleAssignmentScreen extends StatelessWidget {
+  const SingleAssignmentScreen({super.key, required this.assignment});
 
-  @override
-  State<SingleAssignmentScreen> createState() => _SingleAssignmentScreenState();
-}
-
-class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
+  final Assignment assignment;
   @override
   Widget build(BuildContext context) {
+    context.read<SubmissionsBloc>().add(GetAttemptsEvent(assignment.id!));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
@@ -26,14 +26,13 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(
-                  top: 10, left: 25, right: 25),
+              margin: const EdgeInsets.only(top: 10, left: 25, right: 25),
               child: Column(
                 //Start of the main column
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Assignment Title",
+                  Text(
+                    assignment.assignmentTitle!,
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   CSpaces.kVspace4,
@@ -76,7 +75,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                               margin: const EdgeInsets.only(top: 10),
                               padding: const EdgeInsets.all(15),
                               decoration: BoxDecoration(
-                                  color: CColors.beige,
+                                  color: CColors.lightBeige,
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,45 +93,20 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                     padding: const EdgeInsets.only(
                                         left: 15.0, top: 10, right: 30),
                                     child: Text(
-                                      "Write a Java program to print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.",
+                                      assignment.assignmentDescription!,
                                       style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.grey[600]),
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 15.0, top: 30, right: 30),
-                                    child: Text(
-                                      "Expected Output",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(
-                                        left: 15.0, top: 10, right: 30),
-                                    width: MediaQuery.of(context).size.width,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 15, horizontal: 15),
-                                    decoration: BoxDecoration(
-                                        color: CColors.lightBeige,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: const Text(
-                                      "Hello\nAlexandra Abramov",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.normal),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.grey[600],
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
                             ), // End of Description Container
                             CSpaces.kVspace16,
-                            Container( //Start of Previous Attempts Container
+                            Container(
+                              //Start of Previous Attempts Container
                               padding: const EdgeInsets.only(
                                   top: 15, bottom: 5, left: 15, right: 15),
                               decoration: BoxDecoration(
@@ -184,7 +158,8 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                     ),
                                   ),
                                   CSpaces.kVspace8,
-                                  Container(//Start of scrolling attempts container
+                                  Container(
+                                    //Start of scrolling attempts container
                                     decoration: BoxDecoration(
                                       // border: Border(
                                       //   top: BorderSide(
@@ -223,21 +198,34 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                         child: Padding(
                                           padding:
                                               const EdgeInsets.only(bottom: 10),
-                                          child: Column(
-                                            children: [
-                                              CSpaces.kVspace8,
-                                              const Attempt_card(),
-                                              CSpaces.kVspace8,
-                                              const Attempt_card(),
-                                              CSpaces.kVspace8,
-                                              const Attempt_card(),
-                                              CSpaces.kVspace8,
-                                              const Attempt_card(),
-                                              CSpaces.kVspace8,
-                                              const Attempt_card(),
-                                              CSpaces.kVspace8,
-                                              const Attempt_card(),
-                                            ],
+                                          child: BlocBuilder<SubmissionsBloc,
+                                              SubmissionsState>(
+                                            builder: (context, state) {
+                                              if (state
+                                                  is AttemptsLoadingState) {
+                                                return CircularProgressIndicator();
+                                              } else if (state
+                                                  is GetAttemptsSuccessfulState) {
+                                                return Column(
+                                                  children: [
+                                                    for (final attempt
+                                                        in state.submissions!)
+                                                      Attempt_card(
+                                                        submission: attempt,
+                                                      )
+                                                  ],
+                                                );
+                                              } else if (state
+                                                  is AttemptsErrorState) {
+                                                return Text(
+                                                    "Something went wrong");
+                                              } else if (state
+                                                  is NoAttemptsFoundState) {
+                                                return Text(
+                                                    "No attempts found, maybe have a go at it");
+                                              }
+                                              return SizedBox();
+                                            },
                                           ),
                                         ),
                                       ),
@@ -251,7 +239,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                   ),
                                 ],
                               ),
-                            ),//End of Previous Attempts Container
+                            ), //End of Previous Attempts Container
                           ],
                         ), //End of scrolling Column
                       ),
@@ -265,7 +253,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
           ],
         ),
       ),
-      //Upload file button 
+      //Upload file button
       floatingActionButton: InkWell(
         onTap: () async {
           uploadFileFromUser(await getAssignmentById(2));

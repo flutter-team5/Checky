@@ -1,19 +1,23 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
+import 'package:checky/model/assignment_model.dart';
 import 'package:checky/screens/assignments_views/single_assignment_screen.dart';
 import 'package:flutter/material.dart';
 
 class AssignCard extends StatelessWidget {
-  const AssignCard({super.key});
+  const AssignCard({super.key, required this.assignment});
+
+  final Assignment assignment;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push(screen: const SingleAssignmentScreen());
+        context.push(screen: SingleAssignmentScreen(assignment: assignment,));
       },
       child: Container(
+        margin: EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -36,8 +40,8 @@ class AssignCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Assignment title", //TODO Add assignment title
+                  Text(
+                    assignment.assignmentTitle!,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: 'ADLaMDisplay',
@@ -45,9 +49,8 @@ class AssignCard extends StatelessWidget {
                     ),
                   ),
                   CSpaces.kVspace8,
-                  const Text(
-                    // TODO Add Assiignment Description
-                    "Assiignment Description Assiignment Description Assiignment Description Assiignment Description",
+                  Text(
+                    assignment.assignmentDescription!,
                     maxLines: 2,
                     style: TextStyle(
                       fontFamily: 'ADLaMDisplay',

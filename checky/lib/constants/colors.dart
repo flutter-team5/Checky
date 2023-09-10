@@ -10,7 +10,7 @@ class CColors {
   static const yellow = Color(0xFFFFDD83);
   static const lightYellow = Color(0xFFFFE59E);
   static const butterMilk = Color.fromARGB(255, 253, 233, 179);
-  static const lightBeige = Color(0xFFF9F5EB);
+  static const lightBeige = Color.fromARGB(255, 236, 233, 223);
   static const white = Colors.white;
   static const black = Colors.black;
   static const darkGrey = Color.fromARGB(255, 63, 63, 63);

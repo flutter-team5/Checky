@@ -3,12 +3,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<List<Assignment>?> getAssignments() async {
   final supabase = Supabase.instance.client;
-  final List asssignmentsJson = await supabase.from('hotel').select();
-  final List<Assignment> assignments = [];
+  final List asssignmentsJson = await supabase.from('assignment').select();
+  final List<Assignment>? assignments = [];
   for (final assignmentJson in asssignmentsJson) {
-    assignments.add(Assignment.fromJson(assignmentJson));
+    Assignment assignment = Assignment.fromJson(assignmentJson);
+    assignments?.add(assignment);
   }
-  return assignments;
+  return assignments?.reversed.toList();
 }
 
 Future<Assignment> getAssignmentById(int id) async {
@@ -20,7 +21,8 @@ Future<Assignment> getAssignmentById(int id) async {
 
 Future<Assignment> insertAssignment(Map assigment) async {
   final supabase = Supabase.instance.client;
-  final Map assignmentJson = await supabase.from('assignment').insert(assigment).select().single();
+  final Map assignmentJson =
+      await supabase.from('assignment').insert(assigment).select().single();
 
   return Assignment.fromJson(assignmentJson);
 }
