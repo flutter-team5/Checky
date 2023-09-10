@@ -13,6 +13,21 @@ Future<List<Submission>?> getSubmissions() async {
   return submissions;
 }
 
+Future<List<Submission>?> getUserSubmissionsByUUID(String userId) async {
+  final UserProfile profile =  await getUserProfileByUserId(Supabase.instance.client.auth.currentUser!.id);
+  return await getUserSubmissions(profile.id!);
+}
+
+Future<List<Submission>?> getUserSubmissions(int userId) async {
+  final supabase = Supabase.instance.client;
+  final List submissionsJson = await supabase.from('submission').select().eq("user_id", userId);
+  final List<Submission> submissions = [];
+  for (final submissionJson in submissionsJson) {
+    submissions.add(Submission.fromJson(submissionJson));
+  }
+  return submissions;
+}
+
 Future<Submission> getSubmissionById(int id) async {
   final supabase = Supabase.instance.client;
   final Map submissionJson =
@@ -28,6 +43,7 @@ Future<List<Submission>?> getUserSubmissionsOnAssignment(
       .select()
       .eq("assignment_id", assignmentId)
       .eq("user_id", userId);
+      
   final List<Submission> submissions = [];
   for (final submissionJson in submissionsJson) {
     submissions.add(Submission.fromJson(submissionJson));

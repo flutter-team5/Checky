@@ -1,9 +1,15 @@
+import 'package:checky/model/assignment_model.dart';
+import 'package:checky/model/submission_model.dart';
+import 'package:checky/services/database/services/assignments_services.dart';
 import 'package:flutter/material.dart';
 
 class AttemptProfileCard extends StatelessWidget {
   const AttemptProfileCard({
     super.key,
+    required this.submission,
   });
+
+  final Submission submission;
 
   @override
   Widget build(BuildContext context) {
@@ -31,20 +37,28 @@ class AttemptProfileCard extends StatelessWidget {
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.42,
-            child: const Text(
-              "Assignment title", //TODO assg title returend here
-              maxLines: 2,
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
+            child: FutureBuilder(
+              future: getAssignmentById(submission.id!),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(
+                    snapshot.data!.assignmentTitle!,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                }
+                return SizedBox();
+              },
             ),
           ),
           const SizedBox(
             width: 55,
           ),
-          const Text(
-            "5/5",
+          Text(
+            "${submission.marksAquired}/${submission.marksAvailable}",
             style: TextStyle(
               fontSize: 15,
             ),

@@ -1,10 +1,14 @@
 import 'package:checky/constants/colors.dart';
+import 'package:checky/model/assignment_model.dart';
 import 'package:flutter/material.dart';
 
 class CreatedAssgCard extends StatelessWidget {
   const CreatedAssgCard({
     super.key,
+    required this.assignment,
   });
+
+  final Assignment assignment;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +34,10 @@ class CreatedAssgCard extends StatelessWidget {
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.42,
-            child: const Text(
-              "Assignment titleAssignment", // TODO Add assg title
+            child: Text(
+              assignment.assignmentTitle!,
               maxLines: 2,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
