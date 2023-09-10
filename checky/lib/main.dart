@@ -1,5 +1,3 @@
-import 'package:checky/screens/assignments_views/main_screen.dart';
-import 'package:checky/screens/onboarding_screen.dart';
 import 'package:checky/bloc/bloc/assignments_bloc.dart';
 import 'package:checky/screens/pre_auth/login_screen.dart';
 import 'package:checky/services/database/database_connector.dart';
@@ -16,14 +14,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
       create: (context) => AssignmentsBloc(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: LogInScreen(),
       ),
-
     );
   }
 }
