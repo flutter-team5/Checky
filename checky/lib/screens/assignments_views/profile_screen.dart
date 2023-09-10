@@ -1,110 +1,136 @@
 import 'package:checky/constants/colors.dart';
+import 'package:checky/constants/spacings.dart';
 import 'package:checky/screens/pre_auth/app.dart';
+import 'package:checky/screens/profile_screens/assignment_tab.dart';
+import 'package:checky/screens/profile_screens/attempts_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
   @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  @override
   Widget build(BuildContext context) {
     final supabase = Supabase.instance.client;
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: CColors.darkGrey,
-          title: const Text(
-            "Profile",
-            style: TextStyle(color: CColors.white),
-          ),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.logout_outlined,
-                color: CColors.white,
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 2,
+      child: Scaffold(
+        body: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.47,
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: const BoxDecoration(
+                color: CColors.darkGrey,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(35),
+                  bottomRight: Radius.circular(35),
+                ),
+                boxShadow: [
+                  // BoxShadow(
+                  //   color: Color.fromARGB(80, 0, 0, 0),
+                  //   spreadRadius: 2,
+                  //   blurRadius: 5,
+                  //   offset: Offset(0, 3), // changes position of shadow
+                  // ),
+                ],
               ),
-              onPressed: () {
-                final respone = supabase.auth.signOut();
-                if (respone == supabase.auth.signOut()) {
-                  Navigator.pushAndRemoveUntil(context,
-                      MaterialPageRoute(builder: (context) => const App()),
-                      (route) {
-                    return false;
-                  });
-                }
-              },
-            )
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Profile",
+                        style: TextStyle(
+                          color: CColors.white,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.logout_outlined,
+                          color: CColors.white,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          final respone = supabase.auth.signOut();
+                          if (respone == supabase.auth.signOut()) {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const App()),
+                              (route) {
+                                return false;
+                              },
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  CSpaces.kVspace32,
+                  const CircleAvatar(
+                    backgroundColor: CColors.darkGrey,
+                    radius: 50,
+                    child: CircleAvatar(
+                      radius: 45,
+                      backgroundColor: CColors.white,
+                      child: Icon(
+                        Icons.person,
+                        color: CColors.darkGrey,
+                        size: 50,
+                      ),
+                    ),
+                  ),
+                  CSpaces.kVspace16,
+                  const Text(
+                    "Nasser", //TODO User name will be returend here
+                    style: TextStyle(
+                      color: CColors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            CSpaces.kVspace24,
+            const TabBar(
+              labelColor: CColors.darkGrey,
+              labelStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              indicatorColor: CColors.ligthRed,
+              indicatorWeight: 4,
+              indicatorPadding: EdgeInsets.symmetric(horizontal: 15),
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              tabs: [
+                Tab(
+                  text: "Assignments",
+                ),
+                Tab(
+                  text: "Attempts",
+                ),
+              ],
+            ),
+            const Expanded(
+              child: TabBarView(
+                children: [
+                  //TODO GO inside both these widgets & and add list view bulider
+                  AssignmentTab(),
+                  AttemptsTab(),
+                ],
+              ),
+            ),
           ],
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              const SizedBox(height: 30),
-              const CircleAvatar(
-                backgroundColor: Colors.black,
-                radius: 95,
-                child: CircleAvatar(
-                  radius: 90,
-                  backgroundColor: CColors.ligthRed,
-                ),
-              ),
-              const SizedBox(height: 30),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  padding: const EdgeInsets.all(10),
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: CColors.beige,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'My Assignments',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Icon(Icons.arrow_forward),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  padding: const EdgeInsets.all(10),
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: CColors.beige,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'My Attempts',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Icon(Icons.arrow_forward),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

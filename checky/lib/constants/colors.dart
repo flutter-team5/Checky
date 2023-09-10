@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CColors {
-  static const primary = Color(0xFF060047); 
+  static const primary = Color(0xFF060047);
   static const darkPink = Color(0xFFB3005E);
   static const brightPink = Color(0xFFE90064);
   static const red = Color(0xFFEA5455);
