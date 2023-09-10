@@ -1,3 +1,9 @@
+import 'package:checky/bloc/bloc/assignments_bloc.dart';
+import 'package:checky/screens/assignments_views/create_assigment.dart';
+import 'package:checky/screens/assignments_views/home_screen.dart';
+import 'package:checky/screens/assignments_views/main_screen.dart';
+import 'package:checky/screens/pre_auth/login_screen.dart';
+import 'package:checky/screens/splash_screen.dart';
 import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
 import 'package:checky/bloc/submissions_bloc/submissions_bloc.dart';
 import 'package:checky/screens/assignments_views/main_screen.dart';
@@ -15,6 +21,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AssignmentsBloc(),
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -26,7 +35,7 @@ class MainApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MainScreen(),
+        home: SplashScreen(),
       ),
     );
   }
