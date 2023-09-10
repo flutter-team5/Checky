@@ -26,8 +26,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(
-                  top: 10, left: 25, right: 25),
+              margin: const EdgeInsets.only(top: 10, left: 25, right: 25),
               child: Column(
                 //Start of the main column
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +75,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                               margin: const EdgeInsets.only(top: 10),
                               padding: const EdgeInsets.all(15),
                               decoration: BoxDecoration(
-                                  color: CColors.beige,
+                                  color: CColors.lightBeige,
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,45 +93,20 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                     padding: const EdgeInsets.only(
                                         left: 15.0, top: 10, right: 30),
                                     child: Text(
-                                      "Write a Java program to print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.",
+                                      "Write a Java program to print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.Write a Java program to print 'Hello' on screen and your name on a separate line.",
                                       style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.grey[600]),
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 15.0, top: 30, right: 30),
-                                    child: Text(
-                                      "Expected Output",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(
-                                        left: 15.0, top: 10, right: 30),
-                                    width: MediaQuery.of(context).size.width,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 15, horizontal: 15),
-                                    decoration: BoxDecoration(
-                                        color: CColors.lightBeige,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: const Text(
-                                      "Hello\nAlexandra Abramov",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.normal),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.grey[600],
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
                             ), // End of Description Container
                             CSpaces.kVspace16,
-                            Container( //Start of Previous Attempts Container
+                            Container(
+                              //Start of Previous Attempts Container
                               padding: const EdgeInsets.only(
                                   top: 15, bottom: 5, left: 15, right: 15),
                               decoration: BoxDecoration(
@@ -184,7 +158,8 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                     ),
                                   ),
                                   CSpaces.kVspace8,
-                                  Container(//Start of scrolling attempts container
+                                  Container(
+                                    //Start of scrolling attempts container
                                     decoration: BoxDecoration(
                                       // border: Border(
                                       //   top: BorderSide(
@@ -251,7 +226,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
                                   ),
                                 ],
                               ),
-                            ),//End of Previous Attempts Container
+                            ), //End of Previous Attempts Container
                           ],
                         ), //End of scrolling Column
                       ),
@@ -265,7 +240,7 @@ class _SingleAssignmentScreenState extends State<SingleAssignmentScreen> {
           ],
         ),
       ),
-      //Upload file button 
+      //Upload file button
       floatingActionButton: InkWell(
         onTap: () async {
           uploadFileFromUser(await getAssignmentById(2));
