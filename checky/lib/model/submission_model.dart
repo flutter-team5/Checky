@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Submission {
   int? id;
   DateTime? submissionTime;
@@ -31,4 +33,9 @@ class Submission {
     data['user_id'] = this.userId;
     return data;
   }
+
+  String getSubmissionTimeFormatted() {
+  final formatter = DateFormat('dd MMM yyyy');
+  return formatter.format(submissionTime!);
+}
 }

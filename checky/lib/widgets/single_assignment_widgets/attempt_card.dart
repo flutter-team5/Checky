@@ -1,11 +1,15 @@
 import 'package:checky/constants/colors.dart';
+import 'package:checky/model/submission_model.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class Attempt_card extends StatelessWidget {
   const Attempt_card({
     super.key,
+    required this.submission
   });
+
+  final Submission submission;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +29,10 @@ class Attempt_card extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(10),
       ),
-      child: const Row(
+      child: Row(
         children: [
           Text(
-            "01 Mar 2023",
+            submission.getSubmissionTimeFormatted(),
             style: TextStyle(
               fontSize: 15,
             ),
@@ -37,7 +41,7 @@ class Attempt_card extends StatelessWidget {
             width: 55,
           ),
           Text(
-            "5",
+            "${submission.marksAquired}",
             style: TextStyle(
               fontSize: 15,
             ),
@@ -46,7 +50,7 @@ class Attempt_card extends StatelessWidget {
             width: 110,
           ),
           Text(
-            "5",
+            "${submission.marksAvailable}",
             style: TextStyle(
               fontSize: 15,
             ),

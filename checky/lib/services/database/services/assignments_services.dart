@@ -9,7 +9,7 @@ Future<List<Assignment>?> getAssignments() async {
     Assignment assignment = Assignment.fromJson(assignmentJson);
     assignments?.add(assignment);
   }
-  return assignments;
+  return assignments?.reversed.toList();
 }
 
 Future<Assignment> getAssignmentById(int id) async {

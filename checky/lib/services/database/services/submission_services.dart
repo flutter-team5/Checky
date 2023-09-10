@@ -24,7 +24,7 @@ Future<List<Submission>?> getUserSubmissionsOnAssignment(
     int assignmentId, int userId) async {
   final supabase = Supabase.instance.client;
   final List submissionsJson = await supabase
-      .from('test_case')
+      .from('submission')
       .select()
       .eq("assignment_id", assignmentId)
       .eq("user_id", userId);

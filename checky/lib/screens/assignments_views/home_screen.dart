@@ -1,5 +1,5 @@
 // Home screen navgation will be here
-import 'package:checky/bloc/bloc/assignments_bloc.dart';
+import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/assignments_views/create_assigment.dart';
