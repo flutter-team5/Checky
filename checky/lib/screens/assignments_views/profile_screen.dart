@@ -1,6 +1,8 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/pre_auth/app.dart';
+import 'package:checky/screens/pre_auth/login_screen.dart';
 import 'package:checky/screens/profile_screens/assignment_tab.dart';
 import 'package:checky/screens/profile_screens/attempts_tab.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +75,8 @@ class _ProfileState extends State<Profile> {
                                 return false;
                               },
                             );
+                          } else {
+                            context.push(screen: LogInScreen());
                           }
                         },
                       ),
