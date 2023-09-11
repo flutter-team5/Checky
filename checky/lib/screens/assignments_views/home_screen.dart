@@ -1,5 +1,6 @@
 // Home screen navgation will be here
 import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
+import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/assignments_views/create_assigment.dart';
@@ -104,7 +105,13 @@ class HomeScreen extends StatelessWidget {
                 child: BlocBuilder<AssignmentsBloc, AssignmentsState>(
                   builder: (context, state) {
                     if (state is AssignmentsLoadingState) {
-                      return const CircularProgressIndicator();
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 150.0),
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: CColors.red,
+                        )),
+                      );
                     } else if (state is NoAssignmentsFoundState) {
                       return const Text("No assignments found");
                     } else if (state is GetAssignmentsSuccessfulState) {
@@ -119,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                             CSpaces.kVspace32,
                           ]);
                     } else if (state is AssignmentsErrorState) {
-                      return Text("Something went wrong");
+                      return const Text("Something went wrong");
                     }
 
                     return const SizedBox();

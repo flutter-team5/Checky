@@ -13,6 +13,7 @@ class SplashScreen extends StatelessWidget {
             gifPath: 'assets/gifs/CHECKY(3).gif',
             gifWidth: MediaQuery.of(context).size.width,
             gifHeight: MediaQuery.of(context).size.width,
+
             defaultNextScreen: const LogInScreen(),
             duration: const Duration(milliseconds: 2500),
             onInit: () async {

@@ -35,14 +35,6 @@ class _ProfileState extends State<Profile> {
                   bottomLeft: Radius.circular(35),
                   bottomRight: Radius.circular(35),
                 ),
-                boxShadow: [
-                  // BoxShadow(
-                  //   color: Color.fromARGB(80, 0, 0, 0),
-                  //   spreadRadius: 2,
-                  //   blurRadius: 5,
-                  //   offset: Offset(0, 3), // changes position of shadow
-                  // ),
-                ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
