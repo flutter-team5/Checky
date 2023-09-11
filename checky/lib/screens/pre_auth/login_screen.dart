@@ -4,6 +4,7 @@ import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/pre_auth/app.dart';
 import 'package:checky/screens/pre_auth/sign_up_screen.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
+import 'package:checky/widgets/log_in_widgets/github_button.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -126,15 +127,18 @@ class _LogInScreenState extends State<LogInScreen> {
                       ),
                     ),
                     CSpaces.kVspace64,
+                    const GithubButton(),
+                    CSpaces.kVspace8,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
                           "Don't have any account? ",
                           style: TextStyle(
-                            color: CColors.black,
+                            color: CColors.darkGrey,
                             fontFamily: 'ADLaMDisplay',
                             fontSize: 15,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         InkWell(
@@ -147,6 +151,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               color: CColors.red,
                               fontFamily: 'ADLaMDisplay',
                               fontSize: 15,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
