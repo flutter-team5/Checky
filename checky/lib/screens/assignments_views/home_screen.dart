@@ -113,7 +113,17 @@ class HomeScreen extends StatelessWidget {
                         )),
                       );
                     } else if (state is NoAssignmentsFoundState) {
-                      return const Text("No assignments found");
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 150),
+                        child: Text(
+                          "No assignments found",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: CColors.grey,
+                            fontSize: 20,
+                          ),
+                        ),
+                      );
                     } else if (state is GetAssignmentsSuccessfulState) {
                       return Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,7 +136,17 @@ class HomeScreen extends StatelessWidget {
                             CSpaces.kVspace32,
                           ]);
                     } else if (state is AssignmentsErrorState) {
-                      return const Text("Something went wrong");
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 150),
+                        child: Text(
+                          "Something went wrong : (",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: CColors.grey,
+                            fontSize: 20,
+                          ),
+                        ),
+                      );
                     }
 
                     return const SizedBox();

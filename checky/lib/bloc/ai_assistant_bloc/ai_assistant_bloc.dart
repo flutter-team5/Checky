@@ -1,7 +1,6 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:checky/services/api/ai_assistant_api.dart';
-import 'package:meta/meta.dart';
-
 part 'ai_assistant_event.dart';
 part 'ai_assistant_state.dart';
 

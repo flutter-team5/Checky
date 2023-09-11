@@ -99,15 +99,17 @@ class _LogInScreenState extends State<LogInScreen> {
                               password: passwordController.text,
                             );
                           } on AuthException catch (e) {
+                            // ignore: use_build_context_synchronously
                             ElegantNotification.error(
-                                    title: Text("Log in error"),
+                                    title: const Text("Log in error"),
                                     description:
-                                        Text("incorrict email / password"))
+                                        const Text("incorrict email / password"))
                                 .show(context);
                           } on Exception catch (e) {
+                            // ignore: use_build_context_synchronously
                             ElegantNotification.error(
-                                    title: Text("Log in error"),
-                                    description: Text("something went wrong"))
+                                    title: const Text("Log in error"),
+                                    description: const Text("something went wrong"))
                                 .show(context);
                           }
                           if (context.mounted) {

@@ -14,7 +14,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _BottomNavState extends State<MainScreen> with TickerProviderStateMixin {
-  var _selectedIndex = 0;
+  var _selectedIndex = 1;
 
   void _handleIndexChanged(int i) {
     setState(() {

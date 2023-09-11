@@ -1,14 +1,12 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:checky/bloc/ai_assistant_bloc/ai_assistant_bloc.dart';
+import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
-import 'package:checky/services/api/ai_assistant_api.dart';
 import 'package:checky/widgets/AI_widgets/ai_response_dialog.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
@@ -108,23 +106,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     BlocConsumer<AiAssistantBloc, AiAssistantState>(
                       listener: (context, state) {
                         if (state is GetAiAssistantResponseSuccessfulState) {
                           aiResponsDialog(context, state.aiResponse);
                         } else if (state is FailedAiAssistantResponseState) {
                           ElegantNotification.error(
-                                  title: Text("Error"),
-                                  description: Text("something went wrong"))
+                                  title: const Text("Error"),
+                                  description: const Text("something went wrong"))
                               .show(context);
                         }
                       },
                       builder: (context, state) {
                         if (state is LoadingAiAssistantResponseState) {
-                          return CircularProgressIndicator();
+                          return const Center(
+                              child: CircularProgressIndicator(
+                            color: CColors.ligthRed,
+                          ));
                         }
-                        return SizedBox();
+                        return const SizedBox();
                       },
                     ),
                   ],
