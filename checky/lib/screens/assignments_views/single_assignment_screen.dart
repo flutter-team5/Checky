@@ -32,7 +32,8 @@ class SingleAssignmentScreen extends StatelessWidget {
                 children: [
                   Text(
                     assignment.assignmentTitle!,
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   CSpaces.kVspace4,
                   const Text(
@@ -71,6 +72,7 @@ class SingleAssignmentScreen extends StatelessWidget {
                           children: [
                             Container(
                               //Start of Description container
+                              width: MediaQuery.of(context).size.width,
                               margin: const EdgeInsets.only(top: 10),
                               padding: const EdgeInsets.all(15),
                               decoration: BoxDecoration(
@@ -160,12 +162,6 @@ class SingleAssignmentScreen extends StatelessWidget {
                                   Container(
                                     //Start of scrolling attempts container
                                     decoration: BoxDecoration(
-                                      // border: Border(
-                                      //   top: BorderSide(
-                                      //     color: CColors.darkGrey,
-                                      //     width: 1,
-                                      //   ),
-                                      // ),
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.grey.withOpacity(0.17),
@@ -176,7 +172,7 @@ class SingleAssignmentScreen extends StatelessWidget {
                                       ],
                                     ),
                                     width: MediaQuery.of(context).size.width,
-                                    height: 125,
+                                    // height: 125,
                                     child: ShaderMask(
                                       blendMode: BlendMode.dstOut,
                                       shaderCallback: (Rect rect) {
@@ -202,7 +198,12 @@ class SingleAssignmentScreen extends StatelessWidget {
                                             builder: (context, state) {
                                               if (state
                                                   is AttemptsLoadingState) {
-                                                return CircularProgressIndicator();
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: CColors.white,
+                                                  ),
+                                                );
                                               } else if (state
                                                   is GetAttemptsSuccessfulState) {
                                                 return Column(
@@ -216,14 +217,18 @@ class SingleAssignmentScreen extends StatelessWidget {
                                                 );
                                               } else if (state
                                                   is AttemptsErrorState) {
-                                                return Text(
-                                                    "Something went wrong");
+                                                return Center(
+                                                  child: const Text(
+                                                      "Something went wrong"),
+                                                );
                                               } else if (state
                                                   is NoAttemptsFoundState) {
-                                                return Text(
-                                                    "No attempts found, maybe have a go at it");
+                                                return Center(
+                                                  child: const Text(
+                                                      "No attempts found, maybe have a go at it"),
+                                                );
                                               }
-                                              return SizedBox();
+                                              return const SizedBox();
                                             },
                                           ),
                                         ),

@@ -24,7 +24,7 @@ class MainApp extends StatelessWidget {
           create: (context) => SubmissionsBloc(),
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       ),

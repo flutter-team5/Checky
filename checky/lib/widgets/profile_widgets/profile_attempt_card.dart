@@ -1,4 +1,3 @@
-import 'package:checky/model/assignment_model.dart';
 import 'package:checky/model/submission_model.dart';
 import 'package:checky/services/database/services/assignments_services.dart';
 import 'package:flutter/material.dart';

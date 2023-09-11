@@ -1,6 +1,7 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
+import 'package:checky/screens/assignments_views/main_screen.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:flutter/material.dart';
 
@@ -34,8 +35,7 @@ cancelDialog(context) {
                 children: [
                   InkWell(
                     onTap: () {
-                      context.pop();
-                      context.pop();
+                      context.push(screen: const MainScreen());
                     },
                     child: const CustomButton(
                       title: "Yes",
