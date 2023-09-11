@@ -1,4 +1,6 @@
+import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({
@@ -49,7 +51,11 @@ class SearchField extends StatelessWidget {
             borderRadius: BorderRadius.circular(32.0),
           ),
         ),
-        onSubmitted: (value) {},
+        onChanged: (value) {
+          context
+              .read<AssignmentsBloc>()
+              .add(SearchForAssignmentsEvent(searchTerm: value));
+        },
       ),
     );
   }

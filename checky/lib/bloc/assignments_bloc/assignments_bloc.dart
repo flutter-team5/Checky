@@ -37,5 +37,27 @@ class AssignmentsBloc extends Bloc<AssignmentsEvent, AssignmentsState> {
         emit(AssignmentsErrorState());
       }
     });
+
+    on<SearchForAssignmentsEvent>((event, emit) async {
+      emit(AssignmentsLoadingState());
+
+      try {
+        final List<Assignment> assignments = await getAssignments() ?? [];
+        if (assignments.isNotEmpty) {
+          final List<Assignment> searchAssignments = [];
+          searchAssignments.clear();
+          for (var assignment in assignments) {
+            if (assignment.assignmentTitle!.contains(event.searchTerm)) {
+              searchAssignments.add(assignment);
+            }
+          }
+          emit(GetAssignmentsSuccessfulState(searchAssignments));
+        } else {
+          emit(NoAssignmentsFoundState());
+        }
+      } catch (e) {
+        emit(AssignmentsErrorState());
+      }
+    });
   }
 }

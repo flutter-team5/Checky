@@ -9,6 +9,12 @@ final class GetUserAssignmentsEvent extends AssignmentsEvent {
 
   GetUserAssignmentsEvent({required this.userId});
 
-  
+}
+
+final class SearchForAssignmentsEvent extends AssignmentsEvent {
+  final String searchTerm;
+
+  SearchForAssignmentsEvent({required this.searchTerm});
+
 }
 
