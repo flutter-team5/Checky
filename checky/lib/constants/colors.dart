@@ -5,7 +5,7 @@ class CColors {
   static const darkPink = Color(0xFFB3005E);
   static const brightPink = Color(0xFFE90064);
   static const red = Color(0xFFEA5455);
-  static const ligthRed = Color.fromARGB(255, 234, 127, 127);
+  static const ligthRed = Color(0xFFEA7F7F);
   static const beige = Color(0xFFE4DCCF);
   static const yellow = Color(0xFFFFDD83);
   static const lightYellow = Color(0xFFFFE59E);
