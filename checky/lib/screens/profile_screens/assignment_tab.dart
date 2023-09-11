@@ -1,4 +1,5 @@
 import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
+import 'package:checky/constants/colors.dart';
 import 'package:checky/widgets/profile_widgets/created_assignment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,9 +39,28 @@ class AssignmentTab extends StatelessWidget {
           child: BlocBuilder<AssignmentsBloc, AssignmentsState>(
             builder: (context, state) {
               if (state is AssignmentsLoadingState) {
-                return CircularProgressIndicator();
+                return Center(
+                  child: Container(
+                    margin: const EdgeInsets.all(100),
+                    width: 50,
+                    height: 50,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+                    child: const CircularProgressIndicator(
+                      color: CColors.ligthRed,
+                    ),
+                  ),
+                );
               } else if (state is NoAssignmentsFoundState) {
-                return const Text("You didn't create any assignment yet");
+                return const Padding(
+                  padding: EdgeInsets.only(top: 50.0),
+                  child: Center(
+                    child: Text(
+                      "You didn't create any assignment yet",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                );
               } else if (state is GetAssignmentsSuccessfulState) {
                 return Column(
                   children: [
