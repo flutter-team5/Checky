@@ -4,6 +4,7 @@ import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/pre_auth/app.dart';
 import 'package:checky/services/database/services/profile_service.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -129,10 +130,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if ((emailController.text.isNotEmpty &&
                               emailController.text.isValidEmail) &&
                           passwordController.text.isNotEmpty) {
-                        await supabase.auth.signUp(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
+                        try {
+                          await supabase.auth.signUp(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                        } on Exception catch (e) {
+                          print(e);
+                        }
+
+                        ElegantNotification.success(
+                                title: Text("succues"),
+                                description: Text("succues create account"))
+                            .show(context);
+
                         Map userProfile = new Map();
                         userProfile["user_id"] =
                             Supabase.instance.client.auth.currentUser!.id;

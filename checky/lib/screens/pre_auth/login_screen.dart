@@ -4,6 +4,7 @@ import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/pre_auth/app.dart';
 import 'package:checky/screens/pre_auth/sign_up_screen.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -91,10 +92,23 @@ class _LogInScreenState extends State<LogInScreen> {
                         if ((emailController.text.isNotEmpty &&
                                 emailController.text.isValidEmail) &&
                             passwordController.text.isNotEmpty) {
-                          await supabase.auth.signInWithPassword(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
+                          try {
+                            await supabase.auth.signInWithPassword(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            );
+                          } on AuthException catch (e) {
+                            ElegantNotification.error(
+                                    title: Text("Log in error"),
+                                    description:
+                                        Text("incorrict email / password"))
+                                .show(context);
+                          } on Exception catch (e) {
+                            ElegantNotification.error(
+                                    title: Text("Log in error"),
+                                    description: Text("something went wrong"))
+                                .show(context);
+                          }
                           if (context.mounted) {
                             Navigator.pushAndRemoveUntil(
                                 context,
