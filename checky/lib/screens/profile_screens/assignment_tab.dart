@@ -1,11 +1,16 @@
+import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
 import 'package:checky/widgets/profile_widgets/created_assignment_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AssignmentTab extends StatelessWidget {
   const AssignmentTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    context.read<AssignmentsBloc>().add(GetUserAssignmentsEvent(
+        userId: Supabase.instance.client.auth.currentUser!.id));
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
       margin: const EdgeInsets.only(bottom: 88),
@@ -29,18 +34,25 @@ class AssignmentTab extends StatelessWidget {
           ).createShader(rect);
         },
         blendMode: BlendMode.dstOut,
-        child: const SingleChildScrollView(
-          child: Column(
-            children: [
-              CreatedAssgCard(),
-              CreatedAssgCard(),
-              CreatedAssgCard(),
-              CreatedAssgCard(),
-              CreatedAssgCard(),
-              CreatedAssgCard(),
-              CreatedAssgCard(),
-              CreatedAssgCard(),
-            ],
+        child: SingleChildScrollView(
+          child: BlocBuilder<AssignmentsBloc, AssignmentsState>(
+            builder: (context, state) {
+              if (state is AssignmentsLoadingState) {
+                return CircularProgressIndicator();
+              } else if (state is NoAssignmentsFoundState) {
+                return const Text("You didn't create any assignment yet");
+              } else if (state is GetAssignmentsSuccessfulState) {
+                return Column(
+                  children: [
+                    for (var assignemnt in state.assignments!)
+                      CreatedAssgCard(
+                        assignment: assignemnt,
+                      ),
+                  ],
+                );
+              }
+              return SizedBox();
+            },
           ),
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:checky/constants/colors.dart';
-import 'package:checky/screens/assignments_views/create_assigment.dart';
 import 'package:checky/screens/assignments_views/home_screen.dart';
 import 'package:checky/screens/assignments_views/profile_screen.dart';
+import 'package:checky/screens/onboarding_screen.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class _BottomNavState extends State<MainScreen> with TickerProviderStateMixin {
   }
 
   List screens = [
-    const CreateAssigment(),
+    const OnboardingScreen(),
     const HomeScreen(),
     const Profile(),
   ];
@@ -45,18 +45,19 @@ class _BottomNavState extends State<MainScreen> with TickerProviderStateMixin {
         splashBorderRadius: 50,
         onTap: _handleIndexChanged,
         items: [
-          /// Home
+          // GPT Chat
           DotNavigationBarItem(
             icon: const Icon(Icons.chat),
             selectedColor: CColors.ligthRed,
           ),
 
-          /// Profile
+          // Home
           DotNavigationBarItem(
             icon: const Icon(Icons.home),
             selectedColor: CColors.ligthRed,
           ),
-          //CHAT GPT
+
+          // Profile
           DotNavigationBarItem(
             icon: const Icon(Icons.person),
             selectedColor: CColors.ligthRed,

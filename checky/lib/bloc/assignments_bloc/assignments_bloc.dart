@@ -21,5 +21,21 @@ class AssignmentsBloc extends Bloc<AssignmentsEvent, AssignmentsState> {
         emit(AssignmentsErrorState());
       }
     });
+
+    on<GetUserAssignmentsEvent>((event, emit) async {
+      emit(AssignmentsLoadingState());
+
+      try {
+        final List<Assignment> assignments =
+            await getAssignmentsByAuthor(event.userId) ?? [];
+        if (assignments.isNotEmpty) {
+          emit(GetAssignmentsSuccessfulState(assignments));
+        } else {
+          emit(NoAssignmentsFoundState());
+        }
+      } catch (e) {
+        emit(AssignmentsErrorState());
+      }
+    });
   }
 }

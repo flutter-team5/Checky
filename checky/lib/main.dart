@@ -1,12 +1,6 @@
-import 'package:checky/screens/assignments_views/create_assigment.dart';
-import 'package:checky/screens/assignments_views/home_screen.dart';
-import 'package:checky/screens/assignments_views/main_screen.dart';
-import 'package:checky/screens/pre_auth/login_screen.dart';
 import 'package:checky/screens/splash_screen.dart';
-
 import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
 import 'package:checky/bloc/submissions_bloc/submissions_bloc.dart';
-import 'package:checky/screens/assignments_views/main_screen.dart';
 import 'package:checky/services/database/database_connector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

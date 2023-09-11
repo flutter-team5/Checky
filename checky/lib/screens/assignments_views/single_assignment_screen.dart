@@ -3,7 +3,6 @@ import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/model/assignment_model.dart';
 import 'package:checky/services/api/grading_api.dart';
-import 'package:checky/services/database/services/assignments_services.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:checky/widgets/single_assignment_widgets/attempt_card.dart';
 import 'package:flutter/material.dart';
@@ -256,7 +255,7 @@ class SingleAssignmentScreen extends StatelessWidget {
       //Upload file button
       floatingActionButton: InkWell(
         onTap: () async {
-          uploadFileFromUser(await getAssignmentById(2));
+          uploadFileFromUser(assignment);
         },
         child: const CustomButton(
           title: "+ New submission",
