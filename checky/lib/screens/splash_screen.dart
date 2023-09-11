@@ -1,5 +1,4 @@
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
-import 'package:checky/screens/assignments_views/main_screen.dart';
 import 'package:checky/screens/pre_auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
