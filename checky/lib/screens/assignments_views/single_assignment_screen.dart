@@ -3,6 +3,7 @@ import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/model/assignment_model.dart';
 import 'package:checky/services/api/grading_api.dart';
+import 'package:checky/services/database/services/profile_service.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:checky/widgets/single_assignment_widgets/attempt_card.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +37,18 @@ class SingleAssignmentScreen extends StatelessWidget {
                         fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   CSpaces.kVspace4,
-                  const Text(
-                    "By Publisher name",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  FutureBuilder(
+                    future: getUserProfileById(assignment.userId!),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                          "By ${snapshot.data!.userName}",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        );
+                      }
+                      return SizedBox();
+                    },
                   ),
                   CSpaces.kVspace32,
                   //Assignment Detailes Container
