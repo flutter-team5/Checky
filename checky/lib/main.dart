@@ -1,3 +1,4 @@
+import 'package:checky/bloc/ai_assistant_bloc/ai_assistant_bloc.dart';
 import 'package:checky/screens/splash_screen.dart';
 import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
 import 'package:checky/bloc/submissions_bloc/submissions_bloc.dart';
@@ -22,6 +23,9 @@ class MainApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SubmissionsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => AiAssistantBloc(),
         ),
       ],
       child: const MaterialApp(

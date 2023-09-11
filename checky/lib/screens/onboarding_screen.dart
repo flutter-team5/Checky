@@ -1,9 +1,13 @@
 import 'dart:convert';
 import 'dart:ui';
+import 'package:checky/bloc/ai_assistant_bloc/ai_assistant_bloc.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/services/api/ai_assistant_api.dart';
 import 'package:checky/widgets/AI_widgets/ai_response_dialog.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
@@ -20,37 +24,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   TextEditingController _codeController = TextEditingController();
 
   String chatResponse = '';
-
-  Future<void> sendCodeToChatGPT(String language, String code) async {
-    const String apiKey = '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';
-
-    final response = await http.post(
-      Uri.parse('https://api.openai.com/v1/chat/completions'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $apiKey',
-      },
-      body: jsonEncode({
-        'model': 'gpt-3.5-turbo',
-        'messages': [
-          {
-            'role': 'system',
-            'content':
-                'You are a helpful assistant, and if anyone sends you code, you can help identify and fix the mistakes and give him fead back.',
-          },
-          {'role': 'user', 'content': 'Code in $language:\n$code'}
-        ]
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      //TODO add state mangment!
-      setState(() {
-        chatResponse = responseData['choices'][0]['message']['content'];
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,12 +97,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     Center(
                       child: InkWell(
                         onTap: () {
-                          sendCodeToChatGPT(
-                              _languageController.text, _codeController.text);
-                          print(chatResponse);
-//------------------------- IF WE WILL SHOW THE respons in a dialog insted of container  :) -----------------------------------------------
-                          aiResponsDialog(context,
-                              chatResponse); //TODO CHAT GPT RESPONS DIALOG
+                          context.read<AiAssistantBloc>().add(
+                              GetAiAssistantResponseEvent(
+                                  language: _languageController.text,
+                                  code: _codeController.text));
                         },
                         child: const CustomButton(
                           title: 'Ask AI',
@@ -137,45 +108,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-//------------------------- IF WE WILL SHOW THE respons in a container insted of dialog :) -----------------------------------------------
-                    //chatResponse
-                    // FutureBuilder(
-                    //   future: sendCodeToChatGPT(
-                    //       _languageController.text, _codeController.text),
-                    //   builder: (context, snapshot) {
-                    //     if (snapshot.connectionState ==
-                    //         ConnectionState.waiting) {
-                    //       const Center(
-                    //         child: CircularProgressIndicator(),
-                    //       );
-                    //     }
-                    //     if (snapshot.connectionState == ConnectionState.done) {
-                    //       return Container(
-                    //           decoration: BoxDecoration(
-                    //             color: const Color.fromARGB(143, 255, 255, 255),
-                    //             border: Border.all(
-                    //               color: CColors.grey,
-                    //             ),
-                    //             borderRadius: BorderRadius.circular(6),
-                    //           ),
-                    //           width: MediaQuery.of(context).size.width,
-                    //           height: MediaQuery.of(context).size.height * 0.25,
-                    //           padding: const EdgeInsets.all(8),
-                    //           child: Text(
-                    //             chatResponse,
-                    //             style: const TextStyle(
-                    //                 fontWeight: FontWeight.bold),
-                    //           ));
-                    //     } else {
-                    //       return const Center(
-                    //         child: CircularProgressIndicator(
-                    //           color: CColors.red,
-                    //         ),
-                    //       );
-                    //     }
-                    //   },
-                    // ),
+                    SizedBox(height: 20),
+                    BlocConsumer<AiAssistantBloc, AiAssistantState>(
+                      listener: (context, state) {
+                        if (state is GetAiAssistantResponseSuccessfulState) {
+                          aiResponsDialog(context, state.aiResponse);
+                        } else if (state is FailedAiAssistantResponseState) {
+                          ElegantNotification.error(
+                                  title: Text("Error"),
+                                  description: Text("something went wrong"))
+                              .show(context);
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is LoadingAiAssistantResponseState) {
+                          return CircularProgressIndicator();
+                        }
+                        return SizedBox();
+                      },
+                    ),
                   ],
                 ),
               ),
