@@ -1,5 +1,7 @@
+import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/extentions/extention.dart';
 import 'package:checky/model/assignment_model.dart';
 import 'package:checky/model/controllers_model.dart';
 import 'package:checky/model/user_profile_model.dart';
@@ -11,6 +13,7 @@ import 'package:checky/widgets/create_assg_widgets/test_cases_fileds.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:checky/widgets/labeld_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 List<Controllers> testCasesControllers = [];
@@ -30,6 +33,12 @@ class CreateAssigmentState extends State<CreateAssigment> {
   void dispose() {
     titleController.dispose();
     descriptionController.dispose();
+    for (var controllers in testCasesControllers) {
+      controllers.input.dispose();
+      controllers.output.dispose();
+      controllers.mark.dispose();
+    }
+    testCasesControllers.clear();
     super.dispose();
   }
 
@@ -131,6 +140,10 @@ class CreateAssigmentState extends State<CreateAssigment> {
                               testCase["assignment_id"] = assignment.id;
                               insertTestCase(testCase);
                             }
+                            context
+                                .read<AssignmentsBloc>()
+                                .add(GetAssignmentsEvent());
+                            context.pop();
                           },
                           child: const CustomButton(
                             title: "Create",
