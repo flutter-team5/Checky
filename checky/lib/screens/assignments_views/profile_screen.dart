@@ -20,7 +20,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    final supabase = Supabase.instance.client;
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
@@ -57,7 +56,7 @@ class _ProfileState extends State<Profile> {
             const Expanded(
               child: TabBarView(
                 children: [
-                  //TODO GO inside both these widgets & and add list view bulider
+                 
                   AssignmentTab(),
                   AttemptsTab(),
                 ],
