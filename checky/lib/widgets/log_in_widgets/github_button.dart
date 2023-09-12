@@ -1,8 +1,7 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
-import 'package:checky/screens/assignments_views/main_screen.dart';
+import 'package:checky/screens/assignments_views/home_screen.dart';
 import 'package:checky/screens/pre_auth/app.dart';
-import 'package:checky/services/database/services/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -29,24 +28,14 @@ class GithubButton extends StatelessWidget {
         CSpaces.kHspace8,
         InkWell(
           onTap: () async {
-            final respone = await supabase.auth.signInWithOAuth(
-              Provider.github,
-              // authScreenLaunchMode: LaunchMode.inAppWebView,
-            );
+            final respone = await supabase.auth.signInWithOAuth(Provider.github
+                // authScreenLaunchMode: LaunchMode.inAppWebView,
+                );
+
             if (respone && context.mounted) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MainScreen()));
-
-             
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => App()));
             }
-
-            // if (context.mounted) {
-            //   Navigator.pushAndRemoveUntil(
-            //       context, MaterialPageRoute(builder: (context) => const App()),
-            //       (route) {
-            //     return false;
-            //   });
-            // }
           },
           child: Row(
             children: [
@@ -72,22 +61,3 @@ class GithubButton extends StatelessWidget {
     );
   }
 }
-
-Future loginWithGithub({required BuildContext context}) async {}
-
-
-// () {
-//                           final respone = supabase.auth.signOut();
-//                           if (respone == supabase.auth.signOut()) {
-//                             Navigator.pushAndRemoveUntil(
-//                               context,
-//                               MaterialPageRoute(
-//                                   builder: (context) => const App()),
-//                               (route) {
-//                                 return false;
-//                               },
-//                             );
-//                           } else {
-//                             context.push(screen: LogInScreen());
-//                           }
-//                         },

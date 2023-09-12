@@ -20,6 +20,20 @@ Future<UserProfile> getUserProfileByUserId(String userId) async {
   return UserProfile.fromJson(userProfileJson);
 }
 
+Future<bool> doesUserProfileExist(String userId) async {
+  final supabase = Supabase.instance.client;
+  try {
+    await supabase
+        .from('user_profile')
+        .select()
+        .eq("user_id", userId)
+        .single();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 Future<List<UserProfile>?> getUserSubmittedToAssignment(
     int assignmentId) async {
   List<int> usersId = [];

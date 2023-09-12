@@ -1,14 +1,13 @@
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:checky/screens/pre_auth/app.dart';
-import 'package:checky/screens/pre_auth/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: FlutterSplashScreen.gif(
         backgroundColor: Colors.white,

@@ -4,11 +4,26 @@ import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
 import 'package:checky/extentions/extention.dart';
 import 'package:checky/screens/assignments_views/create_assigment.dart';
+import 'package:checky/services/database/services/profile_service.dart';
 import 'package:checky/widgets/home_widgets/search_filed.dart';
 import 'package:checky/widgets/home_widgets/card_widget_view.dart';
 import 'package:checky/widgets/custom_botton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+createGitHubLogInProfile() async {
+  var auth = Supabase.instance.client.auth;
+  if (auth.currentUser != null) {
+    if (!await doesUserProfileExist(auth.currentUser!.id)) {
+      Map userProfile = new Map();
+      userProfile["user_id"] = auth.currentUser!.id;
+      userProfile["user_name"] =
+          auth.currentSession!.user.userMetadata!["user_name"];
+      insertProfile(userProfile);
+    }
+  }
+}
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -17,6 +32,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    createGitHubLogInProfile();
     context.read<AssignmentsBloc>().add(GetAssignmentsEvent());
     return Column(
       children: [
