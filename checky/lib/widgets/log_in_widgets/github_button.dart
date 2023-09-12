@@ -1,6 +1,10 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
+import 'package:checky/screens/assignments_views/main_screen.dart';
+import 'package:checky/screens/pre_auth/app.dart';
+import 'package:checky/services/database/services/profile_service.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class GithubButton extends StatelessWidget {
   const GithubButton({
@@ -9,6 +13,7 @@ class GithubButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final supabase = Supabase.instance.client;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -23,7 +28,27 @@ class GithubButton extends StatelessWidget {
         ),
         CSpaces.kHspace8,
         InkWell(
-          onTap: () {},
+          onTap: () {
+            final respone = supabase.auth.signInWithOAuth(Provider.github);
+            if (respone != null) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MainScreen()));
+
+              Map userProfile = new Map();
+              userProfile["user_id"] =
+                  Supabase.instance.client.auth.currentUser!.id;
+              userProfile["user_name"] = "GithubUser";
+              insertProfile(userProfile);
+            }
+
+            // if (context.mounted) {
+            //   Navigator.pushAndRemoveUntil(
+            //       context, MaterialPageRoute(builder: (context) => const App()),
+            //       (route) {
+            //     return false;
+            //   });
+            // }
+          },
           child: Row(
             children: [
               Image.asset(
@@ -48,3 +73,22 @@ class GithubButton extends StatelessWidget {
     );
   }
 }
+
+Future loginWithGithub({required BuildContext context}) async {}
+
+
+// () {
+//                           final respone = supabase.auth.signOut();
+//                           if (respone == supabase.auth.signOut()) {
+//                             Navigator.pushAndRemoveUntil(
+//                               context,
+//                               MaterialPageRoute(
+//                                   builder: (context) => const App()),
+//                               (route) {
+//                                 return false;
+//                               },
+//                             );
+//                           } else {
+//                             context.push(screen: LogInScreen());
+//                           }
+//                         },
