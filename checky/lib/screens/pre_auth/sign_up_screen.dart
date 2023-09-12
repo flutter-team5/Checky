@@ -139,9 +139,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           print(e);
                         }
 
+                        // ignore: use_build_context_synchronously
                         ElegantNotification.success(
-                                title: Text("succues"),
-                                description: Text("succues create account"))
+                                title: const Text("Success"),
+                                description: const Text("Account Created Successfully"))
                             .show(context);
 
                         Map userProfile = new Map();
