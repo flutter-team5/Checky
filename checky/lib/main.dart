@@ -5,6 +5,7 @@ import 'package:checky/bloc/submissions_bloc/submissions_bloc.dart';
 import 'package:checky/services/database/database_connector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() {
   initialiseDatabase();
@@ -16,6 +17,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Supabase.instance.client.auth.signOut();
     return MultiBlocProvider(
       providers: [
         BlocProvider(

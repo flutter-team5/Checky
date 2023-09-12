@@ -56,7 +56,6 @@ class _ProfileState extends State<Profile> {
             const Expanded(
               child: TabBarView(
                 children: [
-                 
                   AssignmentTab(),
                   AttemptsTab(),
                 ],

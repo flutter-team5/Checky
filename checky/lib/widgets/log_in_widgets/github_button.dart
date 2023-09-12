@@ -28,17 +28,16 @@ class GithubButton extends StatelessWidget {
         ),
         CSpaces.kHspace8,
         InkWell(
-          onTap: () {
-            final respone = supabase.auth.signInWithOAuth(Provider.github);
-            if (respone != null) {
+          onTap: () async {
+            final respone = await supabase.auth.signInWithOAuth(
+              Provider.github,
+              // authScreenLaunchMode: LaunchMode.inAppWebView,
+            );
+            if (respone && context.mounted) {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => MainScreen()));
 
-              Map userProfile = new Map();
-              userProfile["user_id"] =
-                  Supabase.instance.client.auth.currentUser!.id;
-              userProfile["user_name"] = "GithubUser";
-              insertProfile(userProfile);
+             
             }
 
             // if (context.mounted) {

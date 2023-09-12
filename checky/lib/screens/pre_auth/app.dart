@@ -29,7 +29,6 @@ class _AppState extends State<App> {
         setState(() {});
       }
     });
-
     super.initState();
   }
 
@@ -38,7 +37,7 @@ class _AppState extends State<App> {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: canGoHome ? const MainScreen() : const LogInScreen(),
+          child: canGoHome ? MainScreen() : LogInScreen(),
         ),
       ),
     );
