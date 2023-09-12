@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
     return MaterialApp(
         home: FlutterSplashScreen.gif(
             backgroundColor: Colors.white,
-            gifPath: 'assets/gifs/CHECKY(3).gif',
+            gifPath: 'assets/gifs/CHECKY(4).gif',
             gifWidth: MediaQuery.of(context).size.width,
             gifHeight: MediaQuery.of(context).size.width,
 
