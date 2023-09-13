@@ -13,11 +13,13 @@ Unleash your programming prowess with **Checky**, the dynamic platform that conn
 
 ###  ![team-leader (1)](https://github.com/flutter-team5/Checky/assets/101333803/bfb53eb8-cb7f-482b-81e8-ed3aa2e46862) Team members
 - [Fahd Alsahali](https://github.com/Fahd17) (Backend)
-  - [Fahd Alsahali-CV.pdf](https://github.com/flutter-team5/Checky/files/12599931/Fahd.Alsahali-CV.pdf)
+  - [Fahd-CV.pdf](https://github.com/flutter-team5/Checky/files/12599931/Fahd.Alsahali-CV.pdf)
 - [Mjd Alghamdi](https://github.com/Mjd-Gh) (UI - Frontend)
-  - [Mjd Alghamdi-CV.pdf](https://github.com/flutter-team5/Checky/files/12599947/Mjd.Alghamdi-CV.pdf)
-- [Mohammad Alomari](https://github.com/Muham23d) (Backend)
-  -  [Mohammed Yahya-CV.pdf](https://github.com/flutter-team5/Checky/files/12599948/Mohammed.Yahya-CV.pdf)
+  - [Mjd-CV.pdf](https://github.com/flutter-team5/Checky/files/12599947/Mjd.Alghamdi-CV.pdf)
+- [Mohammed Alomari](https://github.com/Muham23d) (Backend)
+  -  [Mohammed-CV.pdf](https://github.com/flutter-team5/Checky/files/12599948/Mohammed.Yahya-CV.pdf)
 - [Ruba Saad](https://github.com/ru14s) (UI - Frontend)
+  -  [Ruba-CV.pdf](https://github.com/flutter-team5/Checky/files/12600038/Ruba.Saad-.CV.pdf)
+
   
 
