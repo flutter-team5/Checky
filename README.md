@@ -11,9 +11,9 @@ Unleash your programming prowess with **Checky**, the dynamic platform that conn
 
 
 ###  ![team-leader (1)](https://github.com/flutter-team5/Checky/assets/101333803/4cd7c315-bf8f-4ec7-ae1d-f6b8882fde89) Team members
-- [Fahd Alsahali](https://github.com/Fahd17)
-- [Mjd Alghamdi](https://github.com/Mjd-Gh)
-- [Mohammad Alomari](https://github.com/Muham23d)
-- [Ruba Saad](https://github.com/ru14s)
+- [Fahd Alsahali](https://github.com/Fahd17) (Backend)
+- [Mjd Alghamdi](https://github.com/Mjd-Gh) (UI - Frontend)
+- [Mohammad Alomari](https://github.com/Muham23d) (Backend) 
+- [Ruba Saad](https://github.com/ru14s) (UI - Frontend)
   
 
