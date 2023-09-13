@@ -10,7 +10,6 @@ Unleash your programming prowess with **Checky**, the dynamic platform that conn
 ![supabase-logo](https://github.com/flutter-team5/Checky/assets/101333803/22a869b8-e964-4914-82d4-d3f08568604b)
 
 
-
 ###  ![team-leader (1)](https://github.com/flutter-team5/Checky/assets/101333803/bfb53eb8-cb7f-482b-81e8-ed3aa2e46862) Team members
 - [Fahd Alsahali](https://github.com/Fahd17) (Backend)
   - [Fahd-CV.pdf](https://github.com/flutter-team5/Checky/files/12599931/Fahd.Alsahali-CV.pdf)
