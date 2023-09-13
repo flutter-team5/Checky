@@ -37,19 +37,19 @@ class AttemptProfileCard extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.42,
             child: FutureBuilder(
-              future: getAssignmentById(submission.id!),
+              future: getAssignmentById(submission.assignmentId!),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Text(
                     snapshot.data!.assignmentTitle!,
                     maxLines: 2,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   );
                 }
-                return SizedBox();
+                return const SizedBox();
               },
             ),
           ),
@@ -58,7 +58,7 @@ class AttemptProfileCard extends StatelessWidget {
           ),
           Text(
             "${submission.marksAquired}/${submission.marksAvailable}",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
             ),
           ),
