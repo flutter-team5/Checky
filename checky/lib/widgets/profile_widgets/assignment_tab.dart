@@ -1,8 +1,5 @@
 import 'package:checky/bloc/assignments_bloc/assignments_bloc.dart';
 import 'package:checky/constants/colors.dart';
-import 'package:checky/extentions/extention.dart';
-import 'package:checky/screens/pre_auth/app.dart';
-import 'package:checky/screens/pre_auth/login_screen.dart';
 import 'package:checky/widgets/profile_widgets/created_assignment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

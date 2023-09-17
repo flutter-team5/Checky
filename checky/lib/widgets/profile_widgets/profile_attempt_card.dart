@@ -43,13 +43,13 @@ class AttemptProfileCard extends StatelessWidget {
                   return Text(
                     snapshot.data!.assignmentTitle!,
                     maxLines: 2,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   );
                 }
-                return SizedBox();
+                return const SizedBox();
               },
             ),
           ),
@@ -58,7 +58,7 @@ class AttemptProfileCard extends StatelessWidget {
           ),
           Text(
             "${submission.marksAquired}/${submission.marksAvailable}",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
             ),
           ),

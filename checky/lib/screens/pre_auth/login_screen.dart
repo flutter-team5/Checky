@@ -9,7 +9,6 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-//TODO filed movement
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({
@@ -98,6 +97,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               email: emailController.text,
                               password: passwordController.text,
                             );
+                          // ignore: unused_catch_clause
                           } on AuthException catch (e) {
                             // ignore: use_build_context_synchronously
                             ElegantNotification.error(
@@ -105,6 +105,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                     description:
                                         const Text("incorrict email / password"))
                                 .show(context);
+                          // ignore: unused_catch_clause
                           } on Exception catch (e) {
                             // ignore: use_build_context_synchronously
                             ElegantNotification.error(

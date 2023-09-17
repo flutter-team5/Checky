@@ -4,9 +4,9 @@ import 'package:checky/extentions/extention.dart';
 import 'package:checky/model/user_profile_model.dart';
 import 'package:checky/screens/pre_auth/app.dart';
 import 'package:checky/screens/pre_auth/login_screen.dart';
-import 'package:checky/screens/profile_screens/assignment_tab.dart';
-import 'package:checky/screens/profile_screens/attempts_tab.dart';
 import 'package:checky/services/database/services/profile_service.dart';
+import 'package:checky/widgets/profile_widgets/assignment_tab.dart';
+import 'package:checky/widgets/profile_widgets/attempts_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

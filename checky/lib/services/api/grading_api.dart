@@ -39,9 +39,11 @@ gradeSubmission(
   submission["user_id"] = userProfile.id;
 
   insertSubmission(submission);
+
   context
       .read<SubmissionsBloc>()
       .add(GetAttemptsOnAssignmentEvent(assignment.id!));
+
 }
 
 uploadFileFromUser(Assignment assignment, BuildContext context) async {

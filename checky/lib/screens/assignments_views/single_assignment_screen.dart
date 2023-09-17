@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SingleAssignmentScreen extends StatelessWidget {
   const SingleAssignmentScreen({super.key, required this.assignment});
 
+
   final Assignment assignment;
   @override
   Widget build(BuildContext context) {
@@ -45,11 +46,11 @@ class SingleAssignmentScreen extends StatelessWidget {
                       if (snapshot.hasData) {
                         return Text(
                           "By ${snapshot.data!.userName}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         );
                       }
-                      return SizedBox();
+                      return const SizedBox();
                     },
                   ),
                   CSpaces.kVspace32,
@@ -229,14 +230,14 @@ class SingleAssignmentScreen extends StatelessWidget {
                                                 );
                                               } else if (state
                                                   is AttemptsErrorState) {
-                                                return Center(
-                                                  child: const Text(
+                                                return const Center(
+                                                  child: Text(
                                                       "Something went wrong"),
                                                 );
                                               } else if (state
                                                   is NoAttemptsFoundState) {
-                                                return Center(
-                                                  child: const Text(
+                                                return const Center(
+                                                  child: Text(
                                                       "No attempts found, maybe have a go at it"),
                                                 );
                                               }
