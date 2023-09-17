@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SingleAssignmentScreen extends StatelessWidget {
   const SingleAssignmentScreen({super.key, required this.assignment});
 
+
   final Assignment assignment;
   @override
   Widget build(BuildContext context) {
@@ -270,7 +271,7 @@ class SingleAssignmentScreen extends StatelessWidget {
       //Upload file button
       floatingActionButton: InkWell(
         onTap: () async {
-          uploadFileFromUser(assignment);
+          uploadFileFromUser(assignment, context);
         },
         child: const CustomButton(
           title: "+ New submission",

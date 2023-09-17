@@ -21,7 +21,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   TextEditingController _languageController = TextEditingController();
   TextEditingController _codeController = TextEditingController();
 
-  String chatResponse = '';
+  // String chatResponse = '';
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: const SizedBox(),
             ),
           ),
-          const RiveAnimation.asset("assets/riveAssets/new_file.riv"),
+           const RiveAnimation.asset("assets/riveAssets/new_file.riv"),
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(
@@ -114,7 +114,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         } else if (state is FailedAiAssistantResponseState) {
                           ElegantNotification.error(
                                   title: const Text("Error"),
-                                  description: const Text("something went wrong"))
+                                  description:
+                                      const Text("something went wrong"))
                               .show(context);
                         }
                       },
