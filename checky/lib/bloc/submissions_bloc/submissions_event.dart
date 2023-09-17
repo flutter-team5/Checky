@@ -2,10 +2,10 @@ part of 'submissions_bloc.dart';
 
 abstract class SubmissionsEvent {}
 
-final class GetAttemptsEvent extends SubmissionsEvent {
+final class GetAttemptsOnAssignmentEvent extends SubmissionsEvent {
   final int assignmentId;
 
-  GetAttemptsEvent(this.assignmentId);
+  GetAttemptsOnAssignmentEvent(this.assignmentId);
 }
 
 final class GetAllUserAttemptsEvent extends SubmissionsEvent {

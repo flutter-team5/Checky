@@ -10,17 +10,17 @@ part 'submissions_state.dart';
 
 class SubmissionsBloc extends Bloc<SubmissionsEvent, SubmissionsState> {
   SubmissionsBloc() : super(SubmissionsInitial()) {
-    on<GetAttemptsEvent>((event, emit) async {
+    on<GetAttemptsOnAssignmentEvent>((event, emit) async {
       emit(AttemptsLoadingState());
 
       try {
         UserProfile userProfile = await getUserProfileByUserId(
             Supabase.instance.client.auth.currentUser!.id);
-        final List<Submission> attempts =
-            await getUserSubmissionsOnAssignment(event.assignmentId, userProfile.id!) ??
-                [];
+        final List<Submission> attempts = await getUserSubmissionsOnAssignment(
+                event.assignmentId, userProfile.id!) ??
+            [];
         if (attempts.isNotEmpty) {
-          emit(GetAttemptsSuccessfulState(attempts));
+          emit(GetAttemptsSuccessfulState(attempts.reversed.toList()));
         } else {
           emit(NoAttemptsFoundState());
         }
@@ -37,7 +37,7 @@ class SubmissionsBloc extends Bloc<SubmissionsEvent, SubmissionsState> {
         final List<Submission> attempts =
             await getUserSubmissionsByUUID(event.userId) ?? [];
         if (attempts.isNotEmpty) {
-          emit(GetAttemptsSuccessfulState(attempts));
+          emit(GetAttemptsSuccessfulState(attempts.reversed.toList()));
         } else {
           emit(NoAttemptsFoundState());
         }

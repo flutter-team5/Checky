@@ -15,7 +15,9 @@ class SingleAssignmentScreen extends StatelessWidget {
   final Assignment assignment;
   @override
   Widget build(BuildContext context) {
-    context.read<SubmissionsBloc>().add(GetAttemptsEvent(assignment.id!));
+    context
+        .read<SubmissionsBloc>()
+        .add(GetAttemptsOnAssignmentEvent(assignment.id!));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
@@ -270,7 +272,7 @@ class SingleAssignmentScreen extends StatelessWidget {
       //Upload file button
       floatingActionButton: InkWell(
         onTap: () async {
-          uploadFileFromUser(assignment);
+          uploadFileFromUser(assignment, context);
         },
         child: const CustomButton(
           title: "+ New submission",

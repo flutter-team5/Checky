@@ -37,7 +37,7 @@ class AttemptProfileCard extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.42,
             child: FutureBuilder(
-              future: getAssignmentById(submission.id!),
+              future: getAssignmentById(submission.assignmentId!),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Text(

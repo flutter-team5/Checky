@@ -1,6 +1,5 @@
 import 'package:checky/constants/colors.dart';
 import 'package:checky/constants/spacings.dart';
-import 'package:checky/screens/assignments_views/home_screen.dart';
 import 'package:checky/screens/pre_auth/app.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

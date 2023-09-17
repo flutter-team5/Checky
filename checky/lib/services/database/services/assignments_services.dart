@@ -15,7 +15,8 @@ Future<List<Assignment>?> getAssignments() async {
 }
 
 Future<List<Assignment>?> getAssignmentsByAuthor(String userId) async {
-  final UserProfile profile =  await getUserProfileByUserId(Supabase.instance.client.auth.currentUser!.id);
+  final UserProfile profile = await getUserProfileByUserId(
+      Supabase.instance.client.auth.currentUser!.id);
   return await getAssignmentsByAuthorProfile(profile.id!);
 }
 
